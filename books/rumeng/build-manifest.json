@@ -1,0 +1,21 @@
+{
+  "book_id": "rumeng",
+  "title": "如梦",
+  "published_chapters": [
+    {
+      "id": "intro",
+      "label": "卷首",
+      "title": "导读",
+      "source": "如梦_导读.md"
+    },
+    {
+      "id": "ch01",
+      "label": "第一品",
+      "title": "来处",
+      "source": "如梦_第一品_来处_正文.md"
+    }
+  ],
+  "source_repository": "ScreenplayX/Dream",
+  "source_ref": "main",
+  "source_commit": "82cb2b25276b44a94a1caeefae644fb0ccb09636"
+}
