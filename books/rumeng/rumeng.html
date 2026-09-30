@@ -1,205 +1,94 @@
 <!doctype html>
-<html lang="zh-CN"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>如梦</title><style>
-:root{--paper:#f7f3ea;--ink:#26332b;--muted:#6c746d;--line:#d8d2c6;--accent:#4f6658}
-*{box-sizing:border-box}html{scroll-behavior:smooth}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:"Noto Serif CJK SC","Noto Serif SC",serif;line-height:2;font-size:18px}
-.shell{max-width:980px;margin:auto;padding:40px 24px 100px}
-header{padding:48px 0 36px;border-bottom:1px solid var(--line)}
-.eyebrow{color:var(--muted);letter-spacing:.12em;font:13px/1.5 sans-serif}
-h1{font-size:46px;font-weight:500;line-height:1.25;margin:12px 0}
-h2{font-size:29px;font-weight:500;margin-top:3em}
-h3{font-size:23px;font-weight:500;margin-top:2.2em}
-p{margin:0 0 1.1em;text-align:justify}
-blockquote{margin:2em 0;padding:1em 1.4em;border-left:3px solid var(--accent);color:#59635c;background:#efebe2}
-.chapters{display:grid;gap:10px;margin:28px 0 45px}
-.chapter{display:flex;gap:18px;align-items:baseline;padding:12px 16px;border:1px solid var(--line);color:inherit;text-decoration:none;background:rgba(255,255,255,.25)}
-.chapter span{color:var(--muted);font:13px sans-serif}.chapter strong{font-weight:500}
-.downloads{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
-.downloads a{padding:9px 14px;border:1px solid var(--line);color:var(--ink);text-decoration:none;font:14px sans-serif}
-footer{margin-top:80px;color:var(--muted);font:13px/1.7 sans-serif;border-top:1px solid var(--line);padding-top:20px}
-@media(max-width:640px){body{font-size:17px}.shell{padding:22px 17px 70px}h1{font-size:37px}h2{font-size:26px}.chapter{gap:12px}}
-</style></head>
-<body><main class="shell">
-<header><div class="eyebrow">电子书 · 写作初稿</div>
-<h1>如梦</h1>
-<p>而我们每个人的一生，却总是从半途开始。</p>
-<div class="downloads">
-<a href="downloads/rumeng.pdf">PDF</a><a href="downloads/rumeng.docx">Word</a><a href="downloads/rumeng.md">Markdown</a>
-</div></header>
-<nav class="chapters" aria-label="目录"><div class="chapter"><span>卷首</span><strong>导读</strong></a><div class="chapter"><span>第一品</span><strong>来处</strong></a></nav>
-<article><!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="zh-CN">
 <head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>如梦</title>
-  <style>
-    html {
-      color: #1a1a1a;
-      background-color: #fdfdfd;
-    }
-    body {
-      margin: 0 auto;
-      max-width: 36em;
-      padding-left: 50px;
-      padding-right: 50px;
-      padding-top: 50px;
-      padding-bottom: 50px;
-      hyphens: auto;
-      overflow-wrap: break-word;
-      text-rendering: optimizeLegibility;
-      font-kerning: normal;
-    }
-    @media (max-width: 600px) {
-      body {
-        font-size: 0.9em;
-        padding: 12px;
-      }
-      h1 {
-        font-size: 1.8em;
-      }
-    }
-    @media print {
-      html {
-        background-color: white;
-      }
-      body {
-        background-color: transparent;
-        color: black;
-        font-size: 12pt;
-      }
-      p, h2, h3 {
-        orphans: 3;
-        widows: 3;
-      }
-      h2, h3, h4 {
-        page-break-after: avoid;
-      }
-    }
-    p {
-      margin: 1em 0;
-    }
-    a {
-      color: #1a1a1a;
-    }
-    a:visited {
-      color: #1a1a1a;
-    }
-    img {
-      max-width: 100%;
-    }
-    h1, h2, h3, h4, h5, h6 {
-      margin-top: 1.4em;
-    }
-    h5, h6 {
-      font-size: 1em;
-      font-style: italic;
-    }
-    h6 {
-      font-weight: normal;
-    }
-    ol, ul {
-      padding-left: 1.7em;
-      margin-top: 1em;
-    }
-    li > ol, li > ul {
-      margin-top: 0;
-    }
-    blockquote {
-      margin: 1em 0 1em 1.7em;
-      padding-left: 1em;
-      border-left: 2px solid #e6e6e6;
-      color: #606060;
-    }
-    code {
-      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
-      font-size: 85%;
-      margin: 0;
-      hyphens: manual;
-    }
-    pre {
-      margin: 1em 0;
-      overflow: auto;
-    }
-    pre code {
-      padding: 0;
-      overflow: visible;
-      overflow-wrap: normal;
-    }
-    .sourceCode {
-     background-color: transparent;
-     overflow: visible;
-    }
-    hr {
-      background-color: #1a1a1a;
-      border: none;
-      height: 1px;
-      margin: 1em 0;
-    }
-    table {
-      margin: 1em 0;
-      border-collapse: collapse;
-      width: 100%;
-      overflow-x: auto;
-      display: block;
-      font-variant-numeric: lining-nums tabular-nums;
-    }
-    table caption {
-      margin-bottom: 0.75em;
-    }
-    tbody {
-      margin-top: 0.5em;
-      border-top: 1px solid #1a1a1a;
-      border-bottom: 1px solid #1a1a1a;
-    }
-    th {
-      border-top: 1px solid #1a1a1a;
-      padding: 0.25em 0.5em 0.25em 0.5em;
-    }
-    td {
-      padding: 0.125em 0.5em 0.25em 0.5em;
-    }
-    header {
-      margin-bottom: 4em;
-      text-align: center;
-    }
-    #TOC li {
-      list-style: none;
-    }
-    #TOC ul {
-      padding-left: 1.3em;
-    }
-    #TOC > ul {
-      padding-left: 0;
-    }
-    #TOC a:not(:hover) {
-      text-decoration: none;
-    }
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    /* The extra [class] is a hack that increases specificity enough to
-       override a similar rule in reveal.js */
-    ul.task-list[class]{list-style: none;}
-    ul.task-list li input[type="checkbox"] {
-      font-size: inherit;
-      width: 0.8em;
-      margin: 0 0.8em 0.2em -1.6em;
-      vertical-align: middle;
-    }
-    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>如梦</title>
+<style>:root{--paper:#f5f0e6;--ink:#26332b;--muted:#788078;--line:#d8d0c2;--accent:#53695b;--page:#fbf8f1}
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden}
+body{background:var(--paper);color:var(--ink);font-family:"Noto Serif CJK SC","Noto Serif SC","Source Han Serif SC",serif}
+button,input{font:inherit}
+.reader-shell{height:100dvh;display:flex;flex-direction:column;background:var(--paper)}
+.topbar{height:56px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 14px;border-bottom:1px solid var(--line);background:rgba(245,240,230,.96);z-index:20}
+.top-title{font-size:16px;letter-spacing:.08em}
+.top-actions{display:flex;gap:6px}.icon-btn{border:0;background:none;color:var(--ink);padding:8px 10px;border-radius:8px}
+.icon-btn:active,.icon-btn:hover{background:rgba(0,0,0,.06)}
+.book-stage{position:relative;flex:1;min-height:0;overflow:hidden;display:flex;justify-content:center;align-items:stretch}
+.reader-page{display:none;width:min(900px,100%);height:100%;overflow:auto;padding:56px clamp(22px,7vw,80px) 80px;background:var(--page)}
+.reader-page.active{display:block;animation:pageIn .18s ease-out}
+@keyframes pageIn{from{opacity:.4;transform:translateX(12px)}to{opacity:1;transform:none}}
+.cover-page,.toc-page{overflow:hidden}
+.cover-inner{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px}
+.cover-eyebrow,.page-kicker{font:12px/1.5 system-ui,sans-serif;letter-spacing:.18em;color:var(--muted)}
+.cover-page h1{font-size:clamp(52px,10vw,92px);font-weight:400;letter-spacing:.12em;margin:22px 0}
+.cover-rule{width:72px;border-top:1px solid var(--accent);margin:6px auto 28px}
+.cover-quote{max-width:30em;font-size:18px;line-height:2;color:#59635c}
+.cover-edition{margin-top:35px;color:var(--muted);font:12px system-ui,sans-serif}
+.primary-btn{margin-top:42px;border:1px solid var(--accent);background:transparent;color:var(--accent);padding:10px 26px;border-radius:2px}
+.toc-page h1{font-size:42px;font-weight:400;margin:12px 0 36px}
+.toc-list{display:grid;gap:0}.toc-item{display:flex;align-items:baseline;gap:20px;width:100%;padding:17px 4px;border:0;border-bottom:1px solid var(--line);background:none;text-align:left;color:var(--ink);cursor:pointer}
+.toc-item span{min-width:62px;color:var(--muted);font:12px system-ui,sans-serif}.toc-item strong{font-weight:400;font-size:20px}
+.toc-note{margin-top:30px;color:var(--muted);font-size:13px}
+.chapter-page .page-kicker{margin-bottom:8px}.chapter-page h1{font-size:42px;font-weight:400;margin:0 0 42px}
+.chapter-body{font-size:19px;line-height:2.15;max-width:40em;margin:auto}
+.chapter-body h1{display:none}.chapter-body h2{font-size:28px;font-weight:500;margin:2.8em 0 1em}.chapter-body h3{font-size:22px;font-weight:500;margin:2.2em 0 .8em}
+.chapter-body p{margin:0 0 1.05em;text-align:justify}.chapter-body blockquote{margin:1.8em 0;padding:1em 1.2em;border-left:3px solid var(--accent);color:#59635c;background:#f0ece3}
+.chapter-body hr{border:0;border-top:1px solid var(--line);margin:3em 0}
+.reader-controls{height:62px;flex:none;display:flex;align-items:center;gap:14px;padding:0 14px;border-top:1px solid var(--line);background:rgba(245,240,230,.97);z-index:20}
+.reader-controls button{border:0;background:none;color:var(--ink);font-size:13px;padding:9px 4px}.progress{flex:1;min-width:0;text-align:center;color:var(--muted);font:11px system-ui,sans-serif}.progress-bar{height:2px;background:var(--line);margin-top:6px}.progress-bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .2s}
+.drawer{position:fixed;z-index:40;top:0;bottom:0;left:0;width:min(330px,86vw);background:var(--page);transform:translateX(-100%);transition:.2s;box-shadow:8px 0 30px rgba(0,0,0,.08);overflow:auto;padding:18px}
+.drawer.open{transform:none}.drawer-head{display:flex;justify-content:space-between;align-items:center;padding:8px 0 20px}.drawer-home{display:block;width:100%;text-align:left;border:0;background:none;padding:12px 4px;color:var(--ink)}
+.drawer-list .toc-item{padding:12px 4px}.scrim{display:none;position:fixed;inset:0;background:rgba(0,0,0,.25);z-index:30}.scrim.open{display:block}
+.search-panel,.settings-panel{position:fixed;z-index:35;right:14px;top:64px;width:min(430px,calc(100vw - 28px));background:var(--page);border:1px solid var(--line);box-shadow:0 12px 35px rgba(0,0,0,.12);padding:14px}
+.search-row{display:flex;gap:8px}.search-row input{flex:1;border:1px solid var(--line);background:transparent;padding:9px 10px;outline:none}.search-row button{border:0;background:none}
+.search-result{display:block;border:0;border-bottom:1px solid var(--line);background:none;text-align:left;width:100%;padding:12px 4px;color:var(--ink);cursor:pointer}.search-result small{display:block;color:var(--muted);margin-bottom:3px}
+.panel-title{font-size:14px;margin-bottom:14px}.settings-panel label{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:12px 0;font-size:13px}.settings-panel input{width:180px}.theme-row{display:flex;gap:8px;margin-top:16px}.theme-row button{flex:1;border:1px solid var(--line);background:none;padding:8px}
+body[data-theme=night]{--paper:#171915;--page:#1e211e;--ink:#ddd9cf;--muted:#999b91;--line:#3b3e38;--accent:#a9b7aa}
+body[data-theme=light]{--paper:#fff;--page:#fff;--ink:#202520;--muted:#737973;--line:#ddd;--accent:#52685a}
+@media(max-width:640px){.reader-page{padding:34px 22px 60px}.chapter-body{font-size:18px;line-height:2.05}.chapter-page h1{font-size:34px;margin-bottom:32px}.toc-page h1{font-size:36px}.topbar{height:52px}.reader-controls{height:58px}}
+@media print{html,body{height:auto;overflow:visible}.topbar,.reader-controls,.drawer,.scrim,.search-panel,.settings-panel{display:none!important}.reader-page{display:block!important;height:auto;min-height:100vh;overflow:visible;page-break-after:always}.reader-page:last-child{page-break-after:auto}}
+</style>
 </head>
 <body>
-<header id="title-block-header">
-<h1 class="title">如梦</h1>
-</header>
-<h1 id="导读">导读</h1>
+<div class="reader-shell">
+  <header class="topbar">
+    <button class="icon-btn" id="menuBtn" aria-label="打开目录">☰</button>
+    <div class="top-title">如梦</div>
+    <div class="top-actions">
+      <button class="icon-btn" id="searchBtn" aria-label="搜索">⌕</button>
+      <button class="icon-btn" id="settingsBtn" aria-label="阅读设置">Aa</button>
+    </div>
+  </header>
+
+  <aside class="drawer" id="drawer">
+    <div class="drawer-head"><strong>《如梦》</strong><button class="icon-btn" id="closeDrawer">×</button></div>
+    <button class="drawer-home" data-go="cover">封面</button>
+    <button class="drawer-home" data-go="toc">目录</button>
+    <div class="drawer-list"><button class="toc-item" data-go="chapter-0"><span>卷首</span><strong>导读</strong></button><button class="toc-item" data-go="chapter-1"><span>第一品</span><strong>来处</strong></button></div>
+  </aside>
+  <div class="scrim" id="scrim"></div>
+
+  <main class="book-stage" id="bookStage">
+    <section class="reader-page cover-page" id="cover" data-page-type="cover">
+      <div class="cover-inner">
+        <div class="cover-eyebrow">文学 · 思想</div>
+        <h1>如梦</h1>
+        <div class="cover-rule"></div>
+        <p class="cover-quote">而我们每个人的一生，却总是从半途开始。</p>
+        <p class="cover-edition">写作初稿</p>
+        <button class="primary-btn" data-go="toc">开始阅读</button>
+      </div>
+    </section>
+
+    <section class="reader-page toc-page" id="toc" data-page-type="toc">
+      <div class="page-kicker">卷目</div>
+      <h1>目录</h1>
+      <div class="toc-list"><button class="toc-item" data-go="chapter-0"><span>卷首</span><strong>导读</strong></button><button class="toc-item" data-go="chapter-1"><span>第一品</span><strong>来处</strong></button></div>
+      <div class="toc-note">未完成章节不会进入正文。</div>
+    </section>
+
+    <section class="reader-page chapter-page" data-page-type="chapter" data-chapter="0" id="chapter-0"><div class="page-kicker">卷首</div><h1>导读</h1><div class="chapter-body"><h1 id="导读">导读</h1>
 <p>草木向光生长，兽群逐水而行。</p>
 <p>在一张看不见的巨大关系网里，生命顺应着本能活着。</p>
 <p>人也在其中。</p>
@@ -225,9 +114,7 @@ footer{margin-top:80px;color:var(--muted);font:13px/1.7 sans-serif;border-top:1p
 <p>就是我们每天挂在嘴边的——“我”。</p>
 <p>这个承受着一切标尺的“我”，究竟是怎么来的？</p>
 <p>我们每天都在说这个字。</p>
-<p>却很少真正停下来，看过它……</p>
-<hr />
-<h1 id="第一品来处">第一品｜来处</h1>
+<p>却很少真正停下来，看过它……</p></div></section><section class="reader-page chapter-page" data-page-type="chapter" data-chapter="1" id="chapter-1"><div class="page-kicker">第一品</div><h1>来处</h1><div class="chapter-body"><h1 id="第一品来处">第一品｜来处</h1>
 <p>人来到这世间，从来都是半途而入。</p>
 <p>当我们来到这里，世界并不是从头开始。人们早已聚在一起生活，也早已有了各自默认的秩序、规则与尺度。</p>
 <p>从远古部落里的捕猎功绩，到古代社会的门第与功名，再到今天的学历、职级、财富，评价指标的名字与形式在变，背后的作用却没有变。只要人共同生活，就总会形成一些彼此通用的尺度，用来判断位置、安排分工、分配利益。</p>
@@ -250,9 +137,118 @@ footer{margin-top:80px;color:var(--muted);font:13px/1.7 sans-serif;border-top:1p
 <p>既然这套标准是“我”认下的，在“我”心里，按常理，应该是由“我”拿着它衡量生活。我们总以为，凡事都是“我”先接收到，由“我”调动标准去判断，然后再由“我”决定做出怎样的反应。</p>
 <p>但在具体的生活里，根本没有那个等待“我”来批准的过程。那把早已认下的尺子，测算与判决的速度，远远快过了理性的察觉：气已经顶上来了，“我”才发现自己生气了；嘴角已经下意识扬起了，“我”才意识到自己在暗自得意。</p>
 <p>这些内化后的反应早已自行发生。至少在这一刻，我们以为在发号施令的主体——“我”，反倒更像一个事后才得知结果的看客。</p>
-<p>那么，这个习以为常、自居主宰的“我”，真的在作主吗？</p>
+<p>那么，这个习以为常、自居主宰的“我”，真的在作主吗？</p></div></section>
+  </main>
+
+  <footer class="reader-controls">
+    <button id="prevBtn">‹ 上一页</button>
+    <div class="progress"><span id="progressText">封面</span><div class="progress-bar"><i id="progressBar"></i></div></div>
+    <button id="nextBtn">下一页 ›</button>
+  </footer>
+
+  <section class="search-panel" id="searchPanel" hidden>
+    <div class="search-row"><input id="searchInput" placeholder="搜索正文…" autocomplete="off"><button id="closeSearch">×</button></div>
+    <div id="searchResults"></div>
+  </section>
+
+  <section class="settings-panel" id="settingsPanel" hidden>
+    <div class="panel-title">阅读设置</div>
+    <label>字号 <input id="fontSize" type="range" min="16" max="24" value="19"></label>
+    <label>行距 <input id="lineHeight" type="range" min="16" max="24" value="21"></label>
+    <div class="theme-row"><button data-theme="paper">纸张</button><button data-theme="night">夜读</button><button data-theme="light">明亮</button></div>
+  </section>
+</div>
+<script>(() => {
+  const pages = [...document.querySelectorAll(".reader-page")];
+  const progressText = document.getElementById("progressText");
+  const progressBar = document.getElementById("progressBar");
+  let index = 0;
+
+  const chapterNames = pages.filter(p => p.dataset.pageType === "chapter").map(p => {
+    const kicker = p.querySelector(".page-kicker")?.textContent || "";
+    const title = p.querySelector(":scope > h1")?.textContent || "";
+    return kicker + " " + title;
+  });
+
+  function show(i, updateHash = true) {
+    index = Math.max(0, Math.min(pages.length - 1, i));
+    pages.forEach((p, n) => p.classList.toggle("active", n === index));
+    const p = pages[index];
+    if (progressText) {
+      progressText.textContent =
+        p.dataset.pageType === "cover" ? "封面" :
+        p.dataset.pageType === "toc" ? "目录" :
+        chapterNames[index - 2] || "正文";
+    }
+    if (progressBar) progressBar.style.width = ((index + 1) / pages.length * 100) + "%";
+    if (updateHash) history.replaceState(null, "", "#" + p.id);
+    document.getElementById("bookStage")?.scrollTo(0, 0);
+    closePanels();
+  }
+
+  function go(id) {
+    const n = pages.findIndex(p => p.id === id);
+    if (n >= 0) show(n);
+  }
+
+  function closePanels() {
+    document.getElementById("drawer")?.classList.remove("open");
+    document.getElementById("scrim")?.classList.remove("open");
+    document.getElementById("searchPanel")?.setAttribute("hidden", "");
+    document.getElementById("settingsPanel")?.setAttribute("hidden", "");
+  }
+
+  document.getElementById("prevBtn")?.addEventListener("click", () => show(index - 1));
+  document.getElementById("nextBtn")?.addEventListener("click", () => show(index + 1));
+  document.addEventListener("keydown", e => {
+    if (["INPUT","TEXTAREA"].includes(e.target.tagName)) return;
+    if (e.key === "ArrowLeft" || e.key === "PageUp") show(index - 1);
+    if (e.key === "ArrowRight" || e.key === "PageDown" || e.key === " ") { e.preventDefault(); show(index + 1); }
+    if (e.key === "Home") show(0);
+  });
+
+  document.querySelectorAll("[data-go]").forEach(el => el.addEventListener("click", () => go(el.dataset.go)));
+
+  const drawer = document.getElementById("drawer");
+  const scrim = document.getElementById("scrim");
+  document.getElementById("menuBtn")?.addEventListener("click", () => { drawer.classList.add("open"); scrim.classList.add("open"); });
+  document.getElementById("closeDrawer")?.addEventListener("click", closePanels);
+  scrim?.addEventListener("click", closePanels);
+
+  const searchPanel = document.getElementById("searchPanel");
+  const searchInput = document.getElementById("searchInput");
+  const searchResults = document.getElementById("searchResults");
+  document.getElementById("searchBtn")?.addEventListener("click", () => {
+    searchPanel.hidden = false; searchInput.focus();
+  });
+  document.getElementById("closeSearch")?.addEventListener("click", () => searchPanel.hidden = true);
+  searchInput?.addEventListener("input", () => {
+    const q = searchInput.value.trim().toLowerCase();
+    searchResults.innerHTML = "";
+    if (!q) return;
+    pages.filter(p => p.dataset.pageType === "chapter").forEach((p, i) => {
+      const text = p.innerText;
+      const pos = text.toLowerCase().indexOf(q);
+      if (pos < 0) return;
+      const title = p.querySelector(":scope > h1")?.textContent || "";
+      const snippet = text.slice(Math.max(0,pos-28), pos+72).replace(/\s+/g," ");
+      const b = document.createElement("button");
+      b.className = "search-result";
+      b.innerHTML = "<small>" + title + "</small>" + snippet;
+      b.addEventListener("click", () => { show(pages.indexOf(p)); searchPanel.hidden = true; });
+      searchResults.appendChild(b);
+    });
+  });
+
+  const settings = document.getElementById("settingsPanel");
+  document.getElementById("settingsBtn")?.addEventListener("click", () => settings.hidden = !settings.hidden);
+  document.getElementById("fontSize")?.addEventListener("input", e => document.documentElement.style.setProperty("--reader-size", e.target.value + "px"));
+  document.getElementById("lineHeight")?.addEventListener("input", e => document.documentElement.style.setProperty("--reader-leading", (e.target.value / 10).toFixed(1)));
+  document.querySelectorAll("[data-theme]").forEach(b => b.addEventListener("click", () => document.body.dataset.theme = b.dataset.theme));
+
+  const hash = location.hash.slice(1);
+  show(hash && document.getElementById(hash) ? pages.findIndex(p => p.id === hash) : 0, false);
+})();
+</script>
 </body>
 </html>
-</article>
-<footer>本文由私人稿件仓库自动构建发布。未完成章节不进入正文。</footer>
-</main></body></html>
