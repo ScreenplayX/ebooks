@@ -1,254 +1,540 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="paper" data-texture="none">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>如梦</title>
-<style>:root{--paper:#f5f0e6;--ink:#26332b;--muted:#788078;--line:#d8d0c2;--accent:#53695b;--page:#fbf8f1}
-*{box-sizing:border-box}
-html,body{margin:0;width:100%;height:100%;overflow:hidden}
-body{background:var(--paper);color:var(--ink);font-family:"Noto Serif CJK SC","Noto Serif SC","Source Han Serif SC",serif}
-button,input{font:inherit}
-.reader-shell{height:100dvh;display:flex;flex-direction:column;background:var(--paper)}
-.topbar{height:56px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 14px;border-bottom:1px solid var(--line);background:rgba(245,240,230,.96);z-index:20}
-.top-title{font-size:16px;letter-spacing:.08em}
-.top-actions{display:flex;gap:6px}.icon-btn{border:0;background:none;color:var(--ink);padding:8px 10px;border-radius:8px}
-.icon-btn:active,.icon-btn:hover{background:rgba(0,0,0,.06)}
-.book-stage{position:relative;flex:1;min-height:0;overflow:hidden;display:flex;justify-content:center;align-items:stretch}
-.reader-page{display:none;width:min(900px,100%);height:100%;overflow:auto;padding:56px clamp(22px,7vw,80px) 80px;background:var(--page)}
-.reader-page.active{display:block;animation:pageIn .18s ease-out}
-@keyframes pageIn{from{opacity:.4;transform:translateX(12px)}to{opacity:1;transform:none}}
-.cover-page,.toc-page{overflow:hidden}
-.cover-inner{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px}
-.cover-eyebrow,.page-kicker{font:12px/1.5 system-ui,sans-serif;letter-spacing:.18em;color:var(--muted)}
-.cover-page h1{font-size:clamp(52px,10vw,92px);font-weight:400;letter-spacing:.12em;margin:22px 0}
-.cover-rule{width:72px;border-top:1px solid var(--accent);margin:6px auto 28px}
-.cover-quote{max-width:30em;font-size:18px;line-height:2;color:#59635c}
-.cover-edition{margin-top:35px;color:var(--muted);font:12px system-ui,sans-serif}
-.primary-btn{margin-top:42px;border:1px solid var(--accent);background:transparent;color:var(--accent);padding:10px 26px;border-radius:2px}
-.toc-page h1{font-size:42px;font-weight:400;margin:12px 0 36px}
-.toc-list{display:grid;gap:0}.toc-item{display:flex;align-items:baseline;gap:20px;width:100%;padding:17px 4px;border:0;border-bottom:1px solid var(--line);background:none;text-align:left;color:var(--ink);cursor:pointer}
-.toc-item span{min-width:62px;color:var(--muted);font:12px system-ui,sans-serif}.toc-item strong{font-weight:400;font-size:20px}
-.toc-note{margin-top:30px;color:var(--muted);font-size:13px}
-.chapter-page .page-kicker{margin-bottom:8px}.chapter-page h1{font-size:42px;font-weight:400;margin:0 0 42px}
-.chapter-body{font-size:19px;line-height:2.15;max-width:40em;margin:auto}
-.chapter-body h1{display:none}.chapter-body h2{font-size:28px;font-weight:500;margin:2.8em 0 1em}.chapter-body h3{font-size:22px;font-weight:500;margin:2.2em 0 .8em}
-.chapter-body p{margin:0 0 1.05em;text-align:justify}.chapter-body blockquote{margin:1.8em 0;padding:1em 1.2em;border-left:3px solid var(--accent);color:#59635c;background:#f0ece3}
-.chapter-body hr{border:0;border-top:1px solid var(--line);margin:3em 0}
-.reader-controls{height:62px;flex:none;display:flex;align-items:center;gap:14px;padding:0 14px;border-top:1px solid var(--line);background:rgba(245,240,230,.97);z-index:20}
-.reader-controls button{border:0;background:none;color:var(--ink);font-size:13px;padding:9px 4px}.progress{flex:1;min-width:0;text-align:center;color:var(--muted);font:11px system-ui,sans-serif}.progress-bar{height:2px;background:var(--line);margin-top:6px}.progress-bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .2s}
-.drawer{position:fixed;z-index:40;top:0;bottom:0;left:0;width:min(330px,86vw);background:var(--page);transform:translateX(-100%);transition:.2s;box-shadow:8px 0 30px rgba(0,0,0,.08);overflow:auto;padding:18px}
-.drawer.open{transform:none}.drawer-head{display:flex;justify-content:space-between;align-items:center;padding:8px 0 20px}.drawer-home{display:block;width:100%;text-align:left;border:0;background:none;padding:12px 4px;color:var(--ink)}
-.drawer-list .toc-item{padding:12px 4px}.scrim{display:none;position:fixed;inset:0;background:rgba(0,0,0,.25);z-index:30}.scrim.open{display:block}
-.search-panel,.settings-panel{position:fixed;z-index:35;right:14px;top:64px;width:min(430px,calc(100vw - 28px));background:var(--page);border:1px solid var(--line);box-shadow:0 12px 35px rgba(0,0,0,.12);padding:14px}
-.search-row{display:flex;gap:8px}.search-row input{flex:1;border:1px solid var(--line);background:transparent;padding:9px 10px;outline:none}.search-row button{border:0;background:none}
-.search-result{display:block;border:0;border-bottom:1px solid var(--line);background:none;text-align:left;width:100%;padding:12px 4px;color:var(--ink);cursor:pointer}.search-result small{display:block;color:var(--muted);margin-bottom:3px}
-.panel-title{font-size:14px;margin-bottom:14px}.settings-panel label{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:12px 0;font-size:13px}.settings-panel input{width:180px}.theme-row{display:flex;gap:8px;margin-top:16px}.theme-row button{flex:1;border:1px solid var(--line);background:none;padding:8px}
-body[data-theme=night]{--paper:#171915;--page:#1e211e;--ink:#ddd9cf;--muted:#999b91;--line:#3b3e38;--accent:#a9b7aa}
-body[data-theme=light]{--paper:#fff;--page:#fff;--ink:#202520;--muted:#737973;--line:#ddd;--accent:#52685a}
-@media(max-width:640px){.reader-page{padding:34px 22px 60px}.chapter-body{font-size:18px;line-height:2.05}.chapter-page h1{font-size:34px;margin-bottom:32px}.toc-page h1{font-size:36px}.topbar{height:52px}.reader-controls{height:58px}}
-@media print{html,body{height:auto;overflow:visible}.topbar,.reader-controls,.drawer,.scrim,.search-panel,.settings-panel{display:none!important}.reader-page{display:block!important;height:auto;min-height:100vh;overflow:visible;page-break-after:always}.reader-page:last-child{page-break-after:auto}}
+<meta name="color-scheme" content="light dark">
+<meta name="ebook-version" content="bdcbb5cf9861-36804935119-1">
+<title>如梦 · 在线阅读</title>
+<style>:root{color-scheme:light;--paper:#f3eee4;--page:#fbf8f1;--panel:#fbf8f1;--ink:#26332b;--muted:#5b655d;--line:#d1cbbb;--accent:#3f5b4b;--tint:#eee9df;--reader-size:19px;--reader-leading:2;--reader-width:800px;--reader-font:"Noto Serif CJK SC","Songti SC","SimSun",serif;--grain:0;--pattern:none}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}body{background:var(--paper);color:var(--ink);font-family:var(--reader-font)}button,input,select{font:inherit;color:inherit}button,a,input,select{-webkit-tap-highlight-color:transparent}button{cursor:pointer}button:disabled{opacity:.45;cursor:default}a{color:var(--accent);text-underline-offset:.22em}a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px}button{border:1px solid transparent;background:transparent;border-radius:7px;padding:8px 11px}button:hover{background:var(--tint)}[hidden]{display:none!important}.muted{color:var(--muted)}.small{font-size:12px;line-height:1.7}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+.reader-shell{height:100vh;height:100dvh;display:flex;flex-direction:column}.topbar{flex:none;display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:56px;padding:6px max(12px,env(safe-area-inset-right)) 6px max(12px,env(safe-area-inset-left));border-bottom:1px solid var(--line);background:var(--paper);font-family:system-ui,sans-serif;font-size:14px}.top-title{color:var(--ink);font-family:var(--reader-font);font-size:17px;text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.top-actions{display:flex;gap:2px;flex:none}.book-stage{flex:1;position:relative;min-height:0;display:flex;justify-content:center;overflow:hidden;outline:0}.reader-page{display:none;width:min(var(--reader-width),100%);height:100%;overflow:auto;overscroll-behavior:contain;padding:48px clamp(22px,6vw,70px) 64px;background-color:var(--page);background-image:var(--pattern);scroll-behavior:auto;scroll-padding-top:28px}.reader-page.active{display:block}.reader-page h1{font-size:40px;line-height:1.4;font-weight:400;margin:10px 0 32px}.page-kicker,.cover-eyebrow{color:var(--muted);font:12px/1.8 system-ui,sans-serif;letter-spacing:.13em}.cover-inner{min-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:0}.cover-page h1{font-size:clamp(56px,10vw,90px);letter-spacing:.1em;margin:20px 0}.cover-rule{width:64px;border-top:1px solid var(--accent);margin:2px 0 25px}.cover-quote{max-width:27em;color:var(--muted);font-size:18px;line-height:2.1;margin:8px 0 26px}.primary-btn{display:inline-block;border:1px solid var(--accent);padding:10px 27px;text-decoration:none;margin-top:15px;border-radius:3px}.text-btn{color:var(--accent);margin-top:12px;font-size:14px}.cover-version{font:11px/1.8 system-ui,sans-serif;color:var(--muted);margin-top:26px}
+.toc-list{display:grid}.toc-item{display:flex;align-items:baseline;gap:18px;border-bottom:1px solid var(--line);padding:16px 0;text-decoration:none;color:var(--ink)}.toc-item>span:first-child{min-width:56px;font:12px/1.5 system-ui,sans-serif;color:var(--muted)}.toc-item strong{font-size:20px;font-weight:400;flex:1}.toc-state{font:11px/1.5 system-ui,sans-serif;color:var(--muted)}.planned{color:var(--muted)}.toc-note{color:var(--muted);font:12px/1.8 system-ui,sans-serif;margin-top:24px}.chapter-toc{margin-bottom:24px;font-size:14px;line-height:2}.chapter-toc a{display:block}.chapter-body{font-size:var(--reader-size);line-height:var(--reader-leading);overflow-wrap:anywhere}.chapter-body p{margin:0 0 1.1em;text-align:justify}.chapter-body h2,.chapter-body h3,.chapter-body h4{font-weight:500;line-height:1.6;margin:2em 0 1em}.chapter-body h2{font-size:1.4em}.chapter-body h3{font-size:1.15em}.chapter-body img{display:block;max-width:100%;max-height:70vh;height:auto;margin:1em auto}.chapter-body blockquote{margin:1.6em 0;padding:.8em 1.2em;background:var(--tint);border-left:3px solid var(--accent);color:var(--muted)}.chapter-body ul,.chapter-body ol{padding-left:1.5em}.chapter-body code{font-family:monospace;font-size:.9em}.chapter-body pre{white-space:pre-wrap;overflow-wrap:anywhere;background:var(--tint);padding:12px}.table-scroll{max-width:100%;overflow:auto}.chapter-body table{border-collapse:collapse;width:100%;font-size:.9em}.chapter-body td,.chapter-body th{border:1px solid var(--line);padding:.35em .6em;vertical-align:top}.chapter-end{display:flex;justify-content:space-between;gap:16px;border-top:1px solid var(--line);margin-top:42px;padding-top:20px;font:13px/1.7 system-ui,sans-serif;color:var(--muted)}.search-hit{outline:2px solid var(--accent);outline-offset:6px;background:var(--tint)}
+.reader-controls{flex:none;display:flex;align-items:center;gap:12px;min-height:58px;padding:7px 12px calc(7px + env(safe-area-inset-bottom));border-top:1px solid var(--line);background:var(--paper);font:13px/1.6 system-ui,sans-serif}.reader-controls>button{min-width:76px}.progress{flex:1;text-align:center;color:var(--muted);font-size:11px;min-width:0}.progress-track{height:2px;background:var(--line);margin-top:7px}.progress-track i{display:block;height:100%;width:0;background:var(--accent)}
+dialog{color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:14px;width:min(460px,calc(100vw - 26px));max-height:calc(100dvh - 36px);padding:20px;overflow:auto;font-family:system-ui,sans-serif;font-size:14px;box-shadow:0 15px 50px #0003}dialog::backdrop{background:#0005}.dialog-head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:18px}.dialog-head h2{font-size:18px;margin:0;font-weight:600}.dialog-head>button{font-size:24px;line-height:1;padding:6px 10px}dialog.drawer{margin:0;left:0;top:0;bottom:0;height:100%;max-height:100dvh;width:min(330px,88vw);border-radius:0;padding:22px max(20px,env(safe-area-inset-left));padding-bottom:calc(22px + env(safe-area-inset-bottom))}.drawer nav a,.drawer>button,.drawer .library-link,.drawer #extension-actions button{display:block;text-align:left;width:100%;padding:12px 8px;text-decoration:none;color:var(--ink)}.drawer nav [aria-current=page]{background:var(--tint);color:var(--accent);border-radius:6px}.drawer hr{border:0;border-top:1px solid var(--line)}.version-caption{color:var(--muted);font-size:11px;line-height:1.9;overflow-wrap:anywhere;padding:10px 8px}fieldset{border:0;padding:0;margin:17px 0}legend{margin-bottom:8px;font-size:13px;color:var(--muted)}.choices{display:flex;flex-wrap:wrap;gap:6px}.choices button{border:1px solid var(--line);padding:8px 10px;flex:1;white-space:nowrap}.choices button[aria-pressed=true]{border-color:var(--accent);background:var(--tint);color:var(--accent)}.setting-row{display:flex;align-items:center;gap:10px;margin:19px 0;font-size:13px}.setting-row input{flex:1;min-width:0;width:70px;accent-color:var(--accent)}.setting-row output{width:30px;text-align:right;font-variant-numeric:tabular-nums}.secondary-btn{border:1px solid var(--line);width:100%;margin-top:16px;padding:12px}.search-input,select{width:100%;border:1px solid var(--line);background:var(--page);padding:11px;border-radius:7px;font-size:16px}.result-row,.bookmark-row{border-bottom:1px solid var(--line);padding:14px 0;line-height:1.8}.result-row{display:block;text-align:left;width:100%}.result-row small{display:block;color:var(--muted)}.bookmark-row>button:first-child{text-align:left;width:100%;padding-left:0}.bookmark-row>button:last-child{font-size:12px;color:var(--muted)}.download-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}.download-grid button{border:1px solid var(--line);padding:15px 10px;text-align:left}.download-grid strong{display:block;font-size:14px;font-weight:500}.download-grid span{display:block;font-size:11px;color:var(--muted);line-height:1.6;margin-top:5px}.notice{display:flex;align-items:center;justify-content:center;gap:8px;flex:none;background:var(--tint);padding:6px 12px;font:12px/1.6 system-ui,sans-serif}.notice button{padding:5px 9px;border:1px solid var(--line)}#toast{position:fixed;bottom:calc(78px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);padding:10px 16px;border-radius:8px;background:var(--ink);color:var(--page);font:13px/1.7 system-ui,sans-serif;max-width:90vw;width:max-content;pointer-events:none;opacity:0;z-index:100}#toast.show{opacity:1}
+html[data-texture=paper]{--pattern:repeating-linear-gradient(0deg,rgba(73,55,23,var(--grain)) 0,rgba(73,55,23,var(--grain)) 1px,transparent 1px,transparent 4px),repeating-linear-gradient(90deg,transparent 0,transparent 5px,rgba(73,55,23,var(--grain)) 6px,transparent 7px)}html[data-texture=fiber]{--pattern:repeating-linear-gradient(116deg,transparent 0,transparent 5px,rgba(73,55,23,var(--grain)) 6px,transparent 8px),repeating-linear-gradient(24deg,transparent 0,transparent 13px,rgba(73,55,23,var(--grain)) 14px,transparent 16px)}html[data-theme=night]{color-scheme:dark}html[data-font=sans]{--reader-font:"Noto Sans CJK SC","PingFang SC","Microsoft YaHei",system-ui,sans-serif}
+@media(max-width:640px){.reader-page{padding:32px 22px 45px}.reader-page h1{font-size:34px}.cover-page h1{font-size:64px}.topbar{gap:5px;font-size:13px}.topbar button{padding:8px}.top-title{font-size:16px}.cover-quote{font-size:17px}.toc-item{gap:12px}.toc-item strong{font-size:19px}.reader-controls>button{min-width:70px;padding:8px 4px}}
+@media(max-height:500px){.reader-page{padding-top:24px}.cover-inner{min-height:0}.cover-page h1{font-size:48px;margin:8px 0}.cover-rule{margin:5px 0 10px}.cover-version{margin-top:15px}.cover-quote{margin:6px 0 10px}.primary-btn{margin-top:10px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+@media print{
+@page{size:A5 portrait;margin:16mm 14mm 18mm;background:var(--page)}
+html,body{width:auto;height:auto!important;overflow:visible!important;background:var(--page);color:var(--ink);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.reader-shell,.book-stage{display:block!important;height:auto!important;min-height:0!important;overflow:visible!important;position:static!important}
+.topbar,.reader-controls,dialog,#toast,.notice,.no-print,noscript{display:none!important}
+.reader-page{display:block!important;width:auto!important;height:auto!important;min-height:0!important;overflow:visible!important;padding:0!important;position:static!important;break-before:page;animation:none!important;background:var(--page);background-image:var(--pattern)}
+.cover-page{break-before:auto;break-after:page}.cover-inner{height:162mm;min-height:0}.cover-page h1{font-size:54px}.cover-quote{font-size:16px}.cover-version{margin-top:25px}.cover-page .primary-btn,.cover-page .text-btn{display:none!important}
+.reader-page h1{font-size:30px;margin:8px 0 22px;break-after:avoid}.chapter-body{font-size:var(--print-size,15px);line-height:var(--print-leading,1.85);overflow-wrap:anywhere}.chapter-body p{orphans:3;widows:3;margin-bottom:.8em}.chapter-body h2,.chapter-body h3{break-after:avoid}.chapter-body img{max-height:135mm}.chapter-body blockquote{break-inside:avoid}.table-scroll{overflow:visible}.chapter-body table{table-layout:fixed}.chapter-body thead{display:table-header-group}.chapter-body tr{break-inside:avoid}.toc-item{padding:10px 0;break-inside:avoid}.toc-item strong{font-size:17px}.toc-item .toc-state{display:none}.toc-item.planned .toc-state{display:inline}.toc-note{font-size:11px}.search-hit{outline:0;background:transparent}.plugin-page{display:none!important}
+body[data-print-scope]:not([data-print-scope=all]) .reader-page{display:none!important}body[data-print-scope]:not([data-print-scope=all]) .reader-page.print-selected{display:block!important;break-before:auto}
+}
 </style>
 </head>
 <body>
 <div class="reader-shell">
-  <header class="topbar">
-    <button class="icon-btn" id="menuBtn" aria-label="打开目录">☰</button>
-    <div class="top-title">如梦</div>
-    <div class="top-actions">
-      <button class="icon-btn" id="searchBtn" aria-label="搜索">⌕</button>
-      <button class="icon-btn" id="settingsBtn" aria-label="阅读设置">Aa</button>
-    </div>
-  </header>
-
-  <aside class="drawer" id="drawer">
-    <div class="drawer-head"><strong>《如梦》</strong><button class="icon-btn" id="closeDrawer">×</button></div>
-    <button class="drawer-home" data-go="cover">封面</button>
-    <button class="drawer-home" data-go="toc">目录</button>
-    <div class="drawer-list"><button class="toc-item" data-go="chapter-0"><span>卷首</span><strong>导读</strong></button><button class="toc-item" data-go="chapter-1"><span>第一品</span><strong>来处</strong></button></div>
-  </aside>
-  <div class="scrim" id="scrim"></div>
-
-  <main class="book-stage" id="bookStage">
-    <section class="reader-page cover-page" id="cover" data-page-type="cover">
-      <div class="cover-inner">
-        <div class="cover-eyebrow">文学 · 思想</div>
-        <h1>如梦</h1>
-        <div class="cover-rule"></div>
-        <p class="cover-quote">而我们每个人的一生，却总是从半途开始。</p>
-        <p class="cover-edition">写作初稿</p>
-        <button class="primary-btn" data-go="toc">开始阅读</button>
-      </div>
-    </section>
-
-    <section class="reader-page toc-page" id="toc" data-page-type="toc">
-      <div class="page-kicker">卷目</div>
-      <h1>目录</h1>
-      <div class="toc-list"><button class="toc-item" data-go="chapter-0"><span>卷首</span><strong>导读</strong></button><button class="toc-item" data-go="chapter-1"><span>第一品</span><strong>来处</strong></button></div>
-      <div class="toc-note">未完成章节不会进入正文。</div>
-    </section>
-
-    <section class="reader-page chapter-page" data-page-type="chapter" data-chapter="0" id="chapter-0"><div class="page-kicker">卷首</div><h1>导读</h1><div class="chapter-body"><h1 id="导读">导读</h1>
-<p>草木向光生长，兽群逐水而行。</p>
-<p>在一张看不见的巨大关系网里，生命顺应着本能活着。</p>
-<p>人也在其中。</p>
-<p>只是后来，人织出了另一张复杂的网。</p>
-<p>语言、货币、财产、分工、规则、评价体系……人类用漫长的时间，建起了一个庞大且时刻运转的共同世界。</p>
-<p>而我们每个人的一生，却总是从半途开始。</p>
-<p>我们出生的时候，这个世界已经在那里了。</p>
-<p>刚出生的婴儿，不知道什么是成功与失败，也不知道什么叫高低贵贱。</p>
-<p>这些，都是后来一点点学会的。</p>
-<p>起初，那只是外面世界的声音。</p>
-<p>可不知道从哪一天起，已经不需要别人再说了。</p>
-<p>那些外在的评价，不知不觉间，已经默认成了我们自己的评判标准。</p>
-<p>可是，对于这些很多人觉得“本来就该如此”的标尺，我们有没有想过：</p>
-<p>它们最初其实并不属于我们？</p>
-<p>我们只是在适应这张大网的过程中，被动地接下了这一切。</p>
-<p>更重要的是，这些标准没有形状，也没有重量。</p>
-<p>我们之所以会被它们驱使，是因为心里已经默默地“认”了。</p>
-<p>甚至，哪怕你反叛、拒绝，其实也是另一种认——</p>
-<p>因为当你用力去对抗一种标准时，你已经把它当了真。</p>
-<p>只有当它们被认下，那把无形的尺子才真正有了力量；</p>
-<p>那些关于高低、得失、成败的焦虑与期待，才开始源源不断地涌出来。</p>
-<p>而那个全盘接下这一切的主体，</p>
-<p>就是我们每天挂在嘴边的——“我”。</p>
-<p>这个承受着一切标尺的“我”，究竟是怎么来的？</p>
-<p>我们每天都在说这个字。</p>
-<p>却很少真正停下来，看过它……</p></div></section><section class="reader-page chapter-page" data-page-type="chapter" data-chapter="1" id="chapter-1"><div class="page-kicker">第一品</div><h1>来处</h1><div class="chapter-body"><h1 id="第一品来处">第一品｜来处</h1>
-<p>人来到这世间，从来都是半途而入。</p>
-<p>当我们来到这里，世界并不是从头开始。人们早已聚在一起生活，也早已有了各自默认的秩序、规则与尺度。</p>
-<p>从远古部落里的捕猎功绩，到古代社会的门第与功名，再到今天的学历、职级、财富，评价指标的名字与形式在变，背后的作用却没有变。只要人共同生活，就总会形成一些彼此通用的尺度，用来判断位置、安排分工、分配利益。</p>
-<p>我们生在这样的环境里。早在我们形成自己的判断以前，这个环境就已经在悄无声息地塑造我们了：大人在什么情况下会夸赞，在什么情况下会叹气皱眉；大家羡慕的是什么，同情或回避的又是什么。甚至不需要长篇大论的灌输，仅仅在一次次的肯定、纠正与冷落中，我们就学会了什么是“好”，什么是“差”。</p>
-<p>这种浸泡发生得太早、太寻常。我们还没来得及问一句“为什么一定要这样”，身体和大脑就已经习惯了用这套标尺来衡量自己与周围的一切。</p>
-<p>我们只是默认：事情本来就是这样。</p>
-<p>这种默认，不是深思熟虑后的决断，也不是某种愚钝。身在局中，人自然需要借由这些指标来权衡利弊、规划路径，这本是生存的常态。</p>
-<p>只是落到具体的人身上，大家手里握着的标尺并不相同。</p>
-<p>有人追逐财富与阶层，有人看重才华与学识，有人只希望过安稳简单的日子；哪怕追求的是“避世隐居、不问世俗”，只要以此自傲，依然是在用另一把尺子暗暗度量高下。标尺所丈量的，也远不止是人生的成败与得失，它早已渗进了日常——东西用完要不要归位，约定迟几分钟算不算失礼，一句话说到什么程度才算有分寸。许多动作起初不过是重复的习惯，可一旦被视作理所应当，就悄然偷渡成了心里的铁律。</p>
-<p>可无论手里握着哪一把尺子，事情的本质并没有改变：那些原本只是外在的参照与行事的规则，最后落到心里的，却是最切身的喜怒哀乐。</p>
-<p>外在的参照物，究竟是怎样反过来拥有了牵动我们内心的力量？</p>
-<p>这中间，隔着一个极其隐秘的动作：认。</p>
-<p>外在发生的事更像一根引线，而真正埋在心里的火药，是我们早已认下的那份“应该”。</p>
-<p>这套标尺量出了希望，也量出了绝望；量出了优越，也量出了不甘。只要我们在心里认下了某种刻度，那被它肯定时的欣喜，与被它否定时的失落，就注定同时埋下了。</p>
-<p>那么，不认行不行？</p>
-<p>很多人以为，只要拒绝它，就是不认。可“不认”远没有听上去那么容易。反叛、拒绝，也可能是一种认。如果我们刻意去压制它，去证明它错，去证明“我不在乎”，那整个人仍然围着这个标准转，只不过站在了反方向——而反方向的较劲，也依然困在同一个坐标系里。</p>
-<p>不仅如此。很多时候，我们其实清楚，很多激起情绪的事本来没有必要；可理智上想得再明白，真到了具体的事上，心里依然控制不住。</p>
-<p>我们可能会把这归结为“涵养不够”或者“一时没忍住”。</p>
-<p>但退回到情绪萌发的那一刻，一个反直觉的事实便会暴露出来：</p>
-<p>既然这套标准是“我”认下的，在“我”心里，按常理，应该是由“我”拿着它衡量生活。我们总以为，凡事都是“我”先接收到，由“我”调动标准去判断，然后再由“我”决定做出怎样的反应。</p>
-<p>但在具体的生活里，根本没有那个等待“我”来批准的过程。那把早已认下的尺子，测算与判决的速度，远远快过了理性的察觉：气已经顶上来了，“我”才发现自己生气了；嘴角已经下意识扬起了，“我”才意识到自己在暗自得意。</p>
-<p>这些内化后的反应早已自行发生。至少在这一刻，我们以为在发号施令的主体——“我”，反倒更像一个事后才得知结果的看客。</p>
-<p>那么，这个习以为常、自居主宰的“我”，真的在作主吗？</p></div></section>
-  </main>
-
-  <footer class="reader-controls">
-    <button id="prevBtn">‹ 上一页</button>
-    <div class="progress"><span id="progressText">封面</span><div class="progress-bar"><i id="progressBar"></i></div></div>
-    <button id="nextBtn">下一页 ›</button>
-  </footer>
-
-  <section class="search-panel" id="searchPanel" hidden>
-    <div class="search-row"><input id="searchInput" placeholder="搜索正文…" autocomplete="off"><button id="closeSearch">×</button></div>
-    <div id="searchResults"></div>
-  </section>
-
-  <section class="settings-panel" id="settingsPanel" hidden>
-    <div class="panel-title">阅读设置</div>
-    <label>字号 <input id="fontSize" type="range" min="16" max="24" value="19"></label>
-    <label>行距 <input id="lineHeight" type="range" min="16" max="24" value="21"></label>
-    <div class="theme-row"><button data-theme="paper">纸张</button><button data-theme="night">夜读</button><button data-theme="light">明亮</button></div>
-  </section>
+<header class="topbar" aria-label="阅读工具栏">
+<button type="button" data-open="menu-dialog" aria-label="打开导航目录">目录</button>
+<a class="top-title" href="#cover">如梦</a>
+<div class="top-actions">
+<button type="button" data-open="search-dialog">搜索</button>
+<button type="button" data-open="settings-dialog" aria-label="阅读设置">设置</button>
+<button type="button" data-open="downloads-dialog">下载</button>
 </div>
-<script>(() => {
-  const pages = [...document.querySelectorAll(".reader-page")];
-  const progressText = document.getElementById("progressText");
-  const progressBar = document.getElementById("progressBar");
-  let index = 0;
+</header>
+<div id="update-notice" class="notice" hidden role="status"><span id="update-message"></span><button id="load-update" type="button">更新</button><button id="dismiss-update" type="button" aria-label="关闭更新提示">×</button></div>
+<main class="book-stage" id="main" tabindex="-1">
+<section class="reader-page cover-page active" id="cover" data-page-type="cover" aria-label="封面">
+<div class="cover-inner">
+<div class="cover-eyebrow">写作初稿</div>
+<h1>如梦</h1>
 
-  const chapterNames = pages.filter(p => p.dataset.pageType === "chapter").map(p => {
-    const kicker = p.querySelector(".page-kicker")?.textContent || "";
-    const title = p.querySelector(":scope > h1")?.textContent || "";
-    return kicker + " " + title;
-  });
+<div class="cover-rule"></div>
+<p class="cover-quote">而我们每个人的一生，却总是从半途开始。</p>
 
-  function show(i, updateHash = true) {
-    index = Math.max(0, Math.min(pages.length - 1, i));
-    pages.forEach((p, n) => p.classList.toggle("active", n === index));
-    const p = pages[index];
-    if (progressText) {
-      progressText.textContent =
-        p.dataset.pageType === "cover" ? "封面" :
-        p.dataset.pageType === "toc" ? "目录" :
-        chapterNames[index - 2] || "正文";
-    }
-    if (progressBar) progressBar.style.width = ((index + 1) / pages.length * 100) + "%";
-    if (updateHash) history.replaceState(null, "", "#" + p.id);
-    document.getElementById("bookStage")?.scrollTo(0, 0);
-    closePanels();
-  }
+<a class="primary-btn" href="#toc">开始阅读</a>
+<button id="resume-button" class="text-btn" type="button" hidden>继续阅读</button>
+<div class="cover-version">版本 bdcbb5cf9861 · 2026-10-01</div>
+</div>
+</section>
+<section class="reader-page toc-page" id="toc" data-page-type="toc" aria-label="目录">
+<div class="page-kicker">如梦</div><h1>目录</h1>
+<div class="toc-list">
 
-  function go(id) {
-    const n = pages.findIndex(p => p.id === id);
-    if (n >= 0) show(n);
-  }
+<a class="toc-item" href="#intro"><span>卷首</span><strong>导读</strong><span class="toc-state">阅读</span></a>
 
-  function closePanels() {
-    document.getElementById("drawer")?.classList.remove("open");
-    document.getElementById("scrim")?.classList.remove("open");
-    document.getElementById("searchPanel")?.setAttribute("hidden", "");
-    document.getElementById("settingsPanel")?.setAttribute("hidden", "");
-  }
 
-  document.getElementById("prevBtn")?.addEventListener("click", () => show(index - 1));
-  document.getElementById("nextBtn")?.addEventListener("click", () => show(index + 1));
-  document.addEventListener("keydown", e => {
-    if (["INPUT","TEXTAREA"].includes(e.target.tagName)) return;
-    if (e.key === "ArrowLeft" || e.key === "PageUp") show(index - 1);
-    if (e.key === "ArrowRight" || e.key === "PageDown" || e.key === " ") { e.preventDefault(); show(index + 1); }
-    if (e.key === "Home") show(0);
-  });
+<a class="toc-item" href="#ch01"><span>第一品</span><strong>来处</strong><span class="toc-state">阅读</span></a>
 
-  document.querySelectorAll("[data-go]").forEach(el => el.addEventListener("click", () => go(el.dataset.go)));
 
-  const drawer = document.getElementById("drawer");
-  const scrim = document.getElementById("scrim");
-  document.getElementById("menuBtn")?.addEventListener("click", () => { drawer.classList.add("open"); scrim.classList.add("open"); });
-  document.getElementById("closeDrawer")?.addEventListener("click", closePanels);
-  scrim?.addEventListener("click", closePanels);
+<div class="toc-item planned"><span>第二品</span><strong>颠倒</strong><span class="toc-state">待续</span></div>
 
-  const searchPanel = document.getElementById("searchPanel");
-  const searchInput = document.getElementById("searchInput");
-  const searchResults = document.getElementById("searchResults");
-  document.getElementById("searchBtn")?.addEventListener("click", () => {
-    searchPanel.hidden = false; searchInput.focus();
-  });
-  document.getElementById("closeSearch")?.addEventListener("click", () => searchPanel.hidden = true);
-  searchInput?.addEventListener("input", () => {
-    const q = searchInput.value.trim().toLowerCase();
-    searchResults.innerHTML = "";
-    if (!q) return;
-    pages.filter(p => p.dataset.pageType === "chapter").forEach((p, i) => {
-      const text = p.innerText;
-      const pos = text.toLowerCase().indexOf(q);
-      if (pos < 0) return;
-      const title = p.querySelector(":scope > h1")?.textContent || "";
-      const snippet = text.slice(Math.max(0,pos-28), pos+72).replace(/\s+/g," ");
-      const b = document.createElement("button");
-      b.className = "search-result";
-      b.innerHTML = "<small>" + title + "</small>" + snippet;
-      b.addEventListener("click", () => { show(pages.indexOf(p)); searchPanel.hidden = true; });
-      searchResults.appendChild(b);
+<div class="toc-item planned"><span>第三品</span><strong>初醒</strong><span class="toc-state">待续</span></div>
+
+<div class="toc-item planned"><span>第四品</span><strong>心行</strong><span class="toc-state">待续</span></div>
+
+<div class="toc-item planned"><span>第五品</span><strong>住相</strong><span class="toc-state">待续</span></div>
+
+<div class="toc-item planned"><span>第六品</span><strong>不二</strong><span class="toc-state">待续</span></div>
+
+<div class="toc-item planned"><span>第七品</span><strong>分别</strong><span class="toc-state">待续</span></div>
+
+<div class="toc-item planned"><span>第八品</span><strong>如常</strong><span class="toc-state">待续</span></div>
+
+<div class="toc-item planned"><span>第九品</span><strong>自在</strong><span class="toc-state">待续</span></div>
+
+</div>
+<p class="toc-note">未完成章节仅列目录，不收录正文。</p>
+</section>
+
+<section class="reader-page chapter-page" id="intro" data-page-type="chapter" aria-label="导读">
+<div class="page-kicker">卷首</div><h1>导读</h1>
+
+<div class="chapter-body" data-prose="intro"><p data-paragraph="" id="intro-p-0788e47542dd-1">草木向光生长，兽群逐水而行。</p>
+<p data-paragraph="" id="intro-p-fbfb22e94b2f-1">在一张看不见的巨大关系网里，生命顺应着本能活着。</p>
+<p data-paragraph="" id="intro-p-81d972840e5c-1">人也在其中。</p>
+<p data-paragraph="" id="intro-p-0c68e8254d49-1">只是后来，人织出了另一张复杂的网。</p>
+<p data-paragraph="" id="intro-p-ba9bea0bbb9f-1">语言、货币、财产、分工、规则、评价体系……人类用漫长的时间，建起了一个庞大且时刻运转的共同世界。</p>
+<p data-paragraph="" id="intro-p-01d2dc46a5ab-1">而我们每个人的一生，却总是从半途开始。</p>
+<p data-paragraph="" id="intro-p-1536bbe974ce-1">我们出生的时候，这个世界已经在那里了。</p>
+<p data-paragraph="" id="intro-p-fbc6513d4bb2-1">刚出生的婴儿，不知道什么是成功与失败，也不知道什么叫高低贵贱。</p>
+<p data-paragraph="" id="intro-p-122b677e1bda-1">这些，都是后来一点点学会的。</p>
+<p data-paragraph="" id="intro-p-7f3c2732e683-1">起初，那只是外面世界的声音。</p>
+<p data-paragraph="" id="intro-p-f89d1ce013a2-1">可不知道从哪一天起，已经不需要别人再说了。</p>
+<p data-paragraph="" id="intro-p-92eb3b0e82ef-1">那些外在的评价，不知不觉间，已经默认成了我们自己的评判标准。</p>
+<p data-paragraph="" id="intro-p-ce237e4e4a7a-1">可是，对于这些很多人觉得“本来就该如此”的标尺，我们有没有想过：</p>
+<p data-paragraph="" id="intro-p-a4481e1486a2-1">它们最初其实并不属于我们？</p>
+<p data-paragraph="" id="intro-p-d3e009d2e88c-1">我们只是在适应这张大网的过程中，被动地接下了这一切。</p>
+<p data-paragraph="" id="intro-p-4477ef95095b-1">更重要的是，这些标准没有形状，也没有重量。</p>
+<p data-paragraph="" id="intro-p-7c72cd161b35-1">我们之所以会被它们驱使，是因为心里已经默默地“认”了。</p>
+<p data-paragraph="" id="intro-p-5cfb39a03f98-1">甚至，哪怕你反叛、拒绝，其实也是另一种认——</p>
+<p data-paragraph="" id="intro-p-678aa236b31e-1">因为当你用力去对抗一种标准时，你已经把它当了真。</p>
+<p data-paragraph="" id="intro-p-3e7bd31170a0-1">只有当它们被认下，那把无形的尺子才真正有了力量；</p>
+<p data-paragraph="" id="intro-p-1bf7880ebfd9-1">那些关于高低、得失、成败的焦虑与期待，才开始源源不断地涌出来。</p>
+<p data-paragraph="" id="intro-p-cdc8811ae100-1">而那个全盘接下这一切的主体，</p>
+<p data-paragraph="" id="intro-p-74c182c57eb4-1">就是我们每天挂在嘴边的——“我”。</p>
+<p data-paragraph="" id="intro-p-4d94851d6f9a-1">这个承受着一切标尺的“我”，究竟是怎么来的？</p>
+<p data-paragraph="" id="intro-p-9ef8eb990742-1">我们每天都在说这个字。</p>
+<p data-paragraph="" id="intro-p-61973d8b9fc2-1">却很少真正停下来，看过它……</p>
+</div>
+<div class="chapter-end no-print"><a href="#toc">返回目录</a><a href="#ch01">下一章 →</a></div>
+</section>
+
+<section class="reader-page chapter-page" id="ch01" data-page-type="chapter" aria-label="第一品｜来处">
+<div class="page-kicker">第一品</div><h1>来处</h1>
+
+<div class="chapter-body" data-prose="ch01"><p data-paragraph="" id="ch01-p-27a6adaeecad-1">人来到这世间，从来都是半途而入。</p>
+<p data-paragraph="" id="ch01-p-fc2783fc9a3f-1">当我们来到这里，世界并不是从头开始。人们早已聚在一起生活，也早已有了各自默认的秩序、规则与尺度。</p>
+<p data-paragraph="" id="ch01-p-72246670c20b-1">从远古部落里的捕猎功绩，到古代社会的门第与功名，再到今天的学历、职级、财富，评价指标的名字与形式在变，背后的作用却没有变。只要人共同生活，就总会形成一些彼此通用的尺度，用来判断位置、安排分工、分配利益。</p>
+<p data-paragraph="" id="ch01-p-5f11f32b7ed4-1">我们生在这样的环境里。早在我们形成自己的判断以前，这个环境就已经在悄无声息地塑造我们了：大人在什么情况下会夸赞，在什么情况下会叹气皱眉；大家羡慕的是什么，同情或回避的又是什么。甚至不需要长篇大论的灌输，仅仅在一次次的肯定、纠正与冷落中，我们就学会了什么是“好”，什么是“差”。</p>
+<p data-paragraph="" id="ch01-p-de70a48f58c1-1">这种浸泡发生得太早、太寻常。我们还没来得及问一句“为什么一定要这样”，身体和大脑就已经习惯了用这套标尺来衡量自己与周围的一切。</p>
+<p data-paragraph="" id="ch01-p-bda0602f1332-1">我们只是默认：事情本来就是这样。</p>
+<p data-paragraph="" id="ch01-p-f96916f96581-1">这种默认，不是深思熟虑后的决断，也不是某种愚钝。身在局中，人自然需要借由这些指标来权衡利弊、规划路径，这本是生存的常态。</p>
+<p data-paragraph="" id="ch01-p-26e0418e21f3-1">只是落到具体的人身上，大家手里握着的标尺并不相同。</p>
+<p data-paragraph="" id="ch01-p-9e945fafce68-1">有人追逐财富与阶层，有人看重才华与学识，有人只希望过安稳简单的日子；哪怕追求的是“避世隐居、不问世俗”，只要以此自傲，依然是在用另一把尺子暗暗度量高下。标尺所丈量的，也远不止是人生的成败与得失，它早已渗进了日常——东西用完要不要归位，约定迟几分钟算不算失礼，一句话说到什么程度才算有分寸。许多动作起初不过是重复的习惯，可一旦被视作理所应当，就悄然偷渡成了心里的铁律。</p>
+<p data-paragraph="" id="ch01-p-4238870f06b6-1">可无论手里握着哪一把尺子，事情的本质并没有改变：那些原本只是外在的参照与行事的规则，最后落到心里的，却是最切身的喜怒哀乐。</p>
+<p data-paragraph="" id="ch01-p-9c7ff0c0eb9f-1">外在的参照物，究竟是怎样反过来拥有了牵动我们内心的力量？</p>
+<p data-paragraph="" id="ch01-p-db94f8b0c9f2-1">这中间，隔着一个极其隐秘的动作：认。</p>
+<p data-paragraph="" id="ch01-p-32eb2e57be86-1">外在发生的事更像一根引线，而真正埋在心里的火药，是我们早已认下的那份“应该”。</p>
+<p data-paragraph="" id="ch01-p-52c256f60372-1">这套标尺量出了希望，也量出了绝望；量出了优越，也量出了不甘。只要我们在心里认下了某种刻度，那被它肯定时的欣喜，与被它否定时的失落，就注定同时埋下了。</p>
+<p data-paragraph="" id="ch01-p-db023db70275-1">那么，不认行不行？</p>
+<p data-paragraph="" id="ch01-p-c0513e7e79d4-1">很多人以为，只要拒绝它，就是不认。可“不认”远没有听上去那么容易。反叛、拒绝，也可能是一种认。如果我们刻意去压制它，去证明它错，去证明“我不在乎”，那整个人仍然围着这个标准转，只不过站在了反方向——而反方向的较劲，也依然困在同一个坐标系里。</p>
+<p data-paragraph="" id="ch01-p-e12c31183e62-1">不仅如此。很多时候，我们其实清楚，很多激起情绪的事本来没有必要；可理智上想得再明白，真到了具体的事上，心里依然控制不住。</p>
+<p data-paragraph="" id="ch01-p-d8a6265e2d47-1">我们可能会把这归结为“涵养不够”或者“一时没忍住”。</p>
+<p data-paragraph="" id="ch01-p-cd073c356f77-1">但退回到情绪萌发的那一刻，一个反直觉的事实便会暴露出来：</p>
+<p data-paragraph="" id="ch01-p-158b4b14254b-1">既然这套标准是“我”认下的，在“我”心里，按常理，应该是由“我”拿着它衡量生活。我们总以为，凡事都是“我”先接收到，由“我”调动标准去判断，然后再由“我”决定做出怎样的反应。</p>
+<p data-paragraph="" id="ch01-p-8d04f3c1e514-1">但在具体的生活里，根本没有那个等待“我”来批准的过程。那把早已认下的尺子，测算与判决的速度，远远快过了理性的察觉：气已经顶上来了，“我”才发现自己生气了；嘴角已经下意识扬起了，“我”才意识到自己在暗自得意。</p>
+<p data-paragraph="" id="ch01-p-1385bbfe2183-1">这些内化后的反应早已自行发生。至少在这一刻，我们以为在发号施令的主体——“我”，反倒更像一个事后才得知结果的看客。</p>
+<p data-paragraph="" id="ch01-p-d611af031028-1">那么，这个习以为常、自居主宰的“我”，真的在作主吗？</p>
+</div>
+<div class="chapter-end no-print"><a href="#toc">返回目录</a><span>本次收录内容已读完</span></div>
+</section>
+
+</main>
+<footer class="reader-controls">
+<button id="prev-button" type="button">上一章</button>
+<div class="progress"><span id="progress-label">封面</span><div class="progress-track" role="progressbar" aria-label="本章阅读进度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="progress-fill"></i></div></div>
+<button id="next-button" type="button">下一章</button>
+</footer>
+</div>
+<dialog id="menu-dialog" class="drawer" aria-labelledby="menu-title">
+<div class="dialog-head"><h2 id="menu-title">目录</h2><button type="button" data-close aria-label="关闭目录">×</button></div>
+<nav><a href="#cover">封面</a><a href="#toc">完整目录</a><a href="#intro" data-nav-chapter="intro">导读</a><a href="#ch01" data-nav-chapter="ch01">第一品｜来处</a></nav>
+<hr>
+<button type="button" id="add-bookmark">添加书签</button><button type="button" data-open="bookmarks-dialog">我的书签</button>
+<button type="button" data-open="downloads-dialog">下载</button>
+<button type="button" id="check-update">检查更新</button>
+<div id="extension-actions"></div>
+<a class="library-link" href="https://screenplayx.github.io/ebooks/">返回书库</a>
+<p class="version-caption">已发布版本<br><code>bdcbb5cf9861-36804935119-1</code><br>2026-10-01</p>
+</dialog>
+<dialog id="settings-dialog" aria-labelledby="settings-title">
+<div class="dialog-head"><h2 id="settings-title">阅读设置</h2><button type="button" data-close aria-label="关闭设置">×</button></div>
+<fieldset><legend>主题</legend><div class="choices"><button data-theme-choice="paper" type="button">纸张护眼</button><button data-theme-choice="light" type="button">明亮</button><button data-theme-choice="night" type="button">夜晚</button></div></fieldset>
+<div id="paper-settings">
+<fieldset><legend>背景颜色</legend><div class="choices"><button data-paper-choice="ivory" type="button">象牙白</button><button data-paper-choice="sepia" type="button">米黄色</button><button data-paper-choice="green" type="button">淡绿色</button><button data-paper-choice="gray" type="button">浅灰色</button></div></fieldset>
+<label class="setting-row" for="paper-depth">颜色深浅 <input id="paper-depth" type="range" min="0" max="100" step="10"><output id="paper-depth-value"></output></label>
+<fieldset><legend>纸张纹理</legend><div class="choices"><button data-texture-choice="none" type="button">无</button><button data-texture-choice="paper" type="button">纸纹</button><button data-texture-choice="fiber" type="button">纤维</button></div></fieldset>
+<label class="setting-row" for="texture-strength">纹理强度 <input id="texture-strength" type="range" min="0" max="100" step="10"><output id="texture-strength-value"></output></label>
+</div>
+<fieldset><legend>字体</legend><div class="choices"><button data-font-choice="serif" type="button">宋体</button><button data-font-choice="sans" type="button">黑体</button></div></fieldset>
+<label class="setting-row" for="font-size">字号 <input id="font-size" type="range" min="16" max="28" step="1"><output id="font-size-value"></output></label>
+<label class="setting-row" for="line-height">行距 <input id="line-height" type="range" min="1.6" max="2.4" step="0.1"><output id="line-height-value"></output></label>
+<fieldset><legend>页面宽度</legend><div class="choices"><button data-width-choice="680" type="button">窄</button><button data-width-choice="800" type="button">中</button><button data-width-choice="960" type="button">宽</button></div></fieldset>
+<button type="button" id="reset-settings" class="secondary-btn">恢复默认设置</button>
+<p class="small muted">设置只保存在当前浏览器，不会修改正文。</p>
+</dialog>
+<dialog id="search-dialog" aria-labelledby="search-title">
+<div class="dialog-head"><h2 id="search-title">搜索</h2><button type="button" data-close aria-label="关闭搜索">×</button></div>
+<label class="sr-only" for="search-input">搜索正文</label><input id="search-input" class="search-input" type="search" placeholder="搜索正文" autocomplete="off" maxlength="200">
+<div id="search-results" aria-live="polite"></div>
+</dialog>
+<dialog id="bookmarks-dialog" aria-labelledby="bookmarks-title">
+<div class="dialog-head"><h2 id="bookmarks-title">我的书签</h2><button type="button" data-close aria-label="关闭书签">×</button></div>
+<div id="bookmark-list"></div><div class="choices"><button id="export-bookmarks" type="button">导出书签</button><button id="import-bookmarks" type="button">导入书签</button></div><input id="bookmark-file" type="file" accept="application/json,.json" hidden>
+</dialog>
+<dialog id="downloads-dialog" aria-labelledby="downloads-title">
+<div class="dialog-head"><h2 id="downloads-title">下载</h2><button type="button" data-close aria-label="关闭下载">×</button></div>
+<p id="download-version" class="small muted"></p><p id="download-status" role="status"></p>
+<label for="download-scope">下载范围</label><select id="download-scope"><option value="all">全书（已收录内容）</option><option value="intro">导读</option><option value="ch01">第一品｜来处</option></select>
+<div class="download-grid">
+<button type="button" data-download="html"><strong>下载 HTML</strong><span>完整阅读器，可离线阅读</span></button>
+<button type="button" data-download="pdf"><strong>下载 PDF</strong><span>电子书标准排版</span></button>
+<button type="button" data-download="docx"><strong>下载 Word</strong><span>可编辑文稿</span></button>
+<button type="button" data-download="md"><strong>下载 Markdown</strong><span>原始正文</span></button>
+</div>
+<button type="button" id="print-current" class="secondary-btn">按当前设置打印 / 保存为 PDF</button>
+<p class="small muted">打印会导出所选范围的全部内容，不只是当前屏幕。背景和分页以系统打印预览为准。</p>
+</dialog>
+<div id="toast" role="status" aria-live="polite"></div>
+<noscript><p>阅读器需要 JavaScript。请启用 JavaScript 后重新打开。</p></noscript>
+<script id="book-data" type="application/json">{"id":"rumeng","title":"如梦","version":"bdcbb5cf9861-36804935119-1","updated":"2026-10-01T10:14:58+08:00","source_commit":"bdcbb5cf986150a7c57d20738bc3b27b6d81dea5","legacy_anchors":{"chapter-0":"intro","chapter-1":"ch01"},"features":{"search":true,"bookmarks":true,"settings":true,"downloads":true,"updates":true},"chapters":[{"id":"intro","label":"卷首","title":"导读","display":"导读","count":555,"paragraphs":[{"id":"intro-p-0788e47542dd-1","text":"草木向光生长，兽群逐水而行。"},{"id":"intro-p-fbfb22e94b2f-1","text":"在一张看不见的巨大关系网里，生命顺应着本能活着。"},{"id":"intro-p-81d972840e5c-1","text":"人也在其中。"},{"id":"intro-p-0c68e8254d49-1","text":"只是后来，人织出了另一张复杂的网。"},{"id":"intro-p-ba9bea0bbb9f-1","text":"语言、货币、财产、分工、规则、评价体系……人类用漫长的时间，建起了一个庞大且时刻运转的共同世界。"},{"id":"intro-p-01d2dc46a5ab-1","text":"而我们每个人的一生，却总是从半途开始。"},{"id":"intro-p-1536bbe974ce-1","text":"我们出生的时候，这个世界已经在那里了。"},{"id":"intro-p-fbc6513d4bb2-1","text":"刚出生的婴儿，不知道什么是成功与失败，也不知道什么叫高低贵贱。"},{"id":"intro-p-122b677e1bda-1","text":"这些，都是后来一点点学会的。"},{"id":"intro-p-7f3c2732e683-1","text":"起初，那只是外面世界的声音。"},{"id":"intro-p-f89d1ce013a2-1","text":"可不知道从哪一天起，已经不需要别人再说了。"},{"id":"intro-p-92eb3b0e82ef-1","text":"那些外在的评价，不知不觉间，已经默认成了我们自己的评判标准。"},{"id":"intro-p-ce237e4e4a7a-1","text":"可是，对于这些很多人觉得“本来就该如此”的标尺，我们有没有想过："},{"id":"intro-p-a4481e1486a2-1","text":"它们最初其实并不属于我们？"},{"id":"intro-p-d3e009d2e88c-1","text":"我们只是在适应这张大网的过程中，被动地接下了这一切。"},{"id":"intro-p-4477ef95095b-1","text":"更重要的是，这些标准没有形状，也没有重量。"},{"id":"intro-p-7c72cd161b35-1","text":"我们之所以会被它们驱使，是因为心里已经默默地“认”了。"},{"id":"intro-p-5cfb39a03f98-1","text":"甚至，哪怕你反叛、拒绝，其实也是另一种认——"},{"id":"intro-p-678aa236b31e-1","text":"因为当你用力去对抗一种标准时，你已经把它当了真。"},{"id":"intro-p-3e7bd31170a0-1","text":"只有当它们被认下，那把无形的尺子才真正有了力量；"},{"id":"intro-p-1bf7880ebfd9-1","text":"那些关于高低、得失、成败的焦虑与期待，才开始源源不断地涌出来。"},{"id":"intro-p-cdc8811ae100-1","text":"而那个全盘接下这一切的主体，"},{"id":"intro-p-74c182c57eb4-1","text":"就是我们每天挂在嘴边的——“我”。"},{"id":"intro-p-4d94851d6f9a-1","text":"这个承受着一切标尺的“我”，究竟是怎么来的？"},{"id":"intro-p-9ef8eb990742-1","text":"我们每天都在说这个字。"},{"id":"intro-p-61973d8b9fc2-1","text":"却很少真正停下来，看过它……"}],"sha256":"206ab083099d9803687471451e7df7e2ca430eaaddf42fc11d5938b092aefc8e"},{"id":"ch01","label":"第一品","title":"来处","display":"第一品｜来处","count":1386,"paragraphs":[{"id":"ch01-p-27a6adaeecad-1","text":"人来到这世间，从来都是半途而入。"},{"id":"ch01-p-fc2783fc9a3f-1","text":"当我们来到这里，世界并不是从头开始。人们早已聚在一起生活，也早已有了各自默认的秩序、规则与尺度。"},{"id":"ch01-p-72246670c20b-1","text":"从远古部落里的捕猎功绩，到古代社会的门第与功名，再到今天的学历、职级、财富，评价指标的名字与形式在变，背后的作用却没有变。只要人共同生活，就总会形成一些彼此通用的尺度，用来判断位置、安排分工、分配利益。"},{"id":"ch01-p-5f11f32b7ed4-1","text":"我们生在这样的环境里。早在我们形成自己的判断以前，这个环境就已经在悄无声息地塑造我们了：大人在什么情况下会夸赞，在什么情况下会叹气皱眉；大家羡慕的是什么，同情或回避的又是什么。甚至不需要长篇大论的灌输，仅仅在一次次的肯定、纠正与冷落中，我们就学会了什么是“好”，什么是“差”。"},{"id":"ch01-p-de70a48f58c1-1","text":"这种浸泡发生得太早、太寻常。我们还没来得及问一句“为什么一定要这样”，身体和大脑就已经习惯了用这套标尺来衡量自己与周围的一切。"},{"id":"ch01-p-bda0602f1332-1","text":"我们只是默认：事情本来就是这样。"},{"id":"ch01-p-f96916f96581-1","text":"这种默认，不是深思熟虑后的决断，也不是某种愚钝。身在局中，人自然需要借由这些指标来权衡利弊、规划路径，这本是生存的常态。"},{"id":"ch01-p-26e0418e21f3-1","text":"只是落到具体的人身上，大家手里握着的标尺并不相同。"},{"id":"ch01-p-9e945fafce68-1","text":"有人追逐财富与阶层，有人看重才华与学识，有人只希望过安稳简单的日子；哪怕追求的是“避世隐居、不问世俗”，只要以此自傲，依然是在用另一把尺子暗暗度量高下。标尺所丈量的，也远不止是人生的成败与得失，它早已渗进了日常——东西用完要不要归位，约定迟几分钟算不算失礼，一句话说到什么程度才算有分寸。许多动作起初不过是重复的习惯，可一旦被视作理所应当，就悄然偷渡成了心里的铁律。"},{"id":"ch01-p-4238870f06b6-1","text":"可无论手里握着哪一把尺子，事情的本质并没有改变：那些原本只是外在的参照与行事的规则，最后落到心里的，却是最切身的喜怒哀乐。"},{"id":"ch01-p-9c7ff0c0eb9f-1","text":"外在的参照物，究竟是怎样反过来拥有了牵动我们内心的力量？"},{"id":"ch01-p-db94f8b0c9f2-1","text":"这中间，隔着一个极其隐秘的动作：认。"},{"id":"ch01-p-32eb2e57be86-1","text":"外在发生的事更像一根引线，而真正埋在心里的火药，是我们早已认下的那份“应该”。"},{"id":"ch01-p-52c256f60372-1","text":"这套标尺量出了希望，也量出了绝望；量出了优越，也量出了不甘。只要我们在心里认下了某种刻度，那被它肯定时的欣喜，与被它否定时的失落，就注定同时埋下了。"},{"id":"ch01-p-db023db70275-1","text":"那么，不认行不行？"},{"id":"ch01-p-c0513e7e79d4-1","text":"很多人以为，只要拒绝它，就是不认。可“不认”远没有听上去那么容易。反叛、拒绝，也可能是一种认。如果我们刻意去压制它，去证明它错，去证明“我不在乎”，那整个人仍然围着这个标准转，只不过站在了反方向——而反方向的较劲，也依然困在同一个坐标系里。"},{"id":"ch01-p-e12c31183e62-1","text":"不仅如此。很多时候，我们其实清楚，很多激起情绪的事本来没有必要；可理智上想得再明白，真到了具体的事上，心里依然控制不住。"},{"id":"ch01-p-d8a6265e2d47-1","text":"我们可能会把这归结为“涵养不够”或者“一时没忍住”。"},{"id":"ch01-p-cd073c356f77-1","text":"但退回到情绪萌发的那一刻，一个反直觉的事实便会暴露出来："},{"id":"ch01-p-158b4b14254b-1","text":"既然这套标准是“我”认下的，在“我”心里，按常理，应该是由“我”拿着它衡量生活。我们总以为，凡事都是“我”先接收到，由“我”调动标准去判断，然后再由“我”决定做出怎样的反应。"},{"id":"ch01-p-8d04f3c1e514-1","text":"但在具体的生活里，根本没有那个等待“我”来批准的过程。那把早已认下的尺子，测算与判决的速度，远远快过了理性的察觉：气已经顶上来了，“我”才发现自己生气了；嘴角已经下意识扬起了，“我”才意识到自己在暗自得意。"},{"id":"ch01-p-1385bbfe2183-1","text":"这些内化后的反应早已自行发生。至少在这一刻，我们以为在发号施令的主体——“我”，反倒更像一个事后才得知结果的看客。"},{"id":"ch01-p-d611af031028-1","text":"那么，这个习以为常、自居主宰的“我”，真的在作主吗？"}],"sha256":"537e95a2834b1fca54e617f3e442e7b2e9b0017d623aeafe8d38cea38e0d0541"}],"canonical_url":"https://screenplayx.github.io/ebooks/books/rumeng/","library_url":"https://screenplayx.github.io/ebooks/","downloads":{"all":{"md":{"file":"rumeng.md","mime":"text/markdown;charset=utf-8","size":5952,"sha256":"14b2ddc1eb112335c77cb33d1a031b8f1715eb7a24a6665f3e8f8f8189270303"},"docx":{"file":"rumeng.docx","mime":"application/vnd.openxmlformats-officedocument.wordprocessingml.document","size":25682,"sha256":"c0364c1ec42f0a2fb5326266724d2ff11fe5e8c98efb394aa8db96e59b508899"},"pdf":{"file":"rumeng.pdf","mime":"application/pdf","size":660686,"sha256":"9e461c127b67b5c2bff5915930ef07e5590a091d92c46108a17772d151b9a666"}},"intro":{"md":{"file":"rumeng-intro.md","mime":"text/markdown;charset=utf-8","size":1726,"sha256":"206ab083099d9803687471451e7df7e2ca430eaaddf42fc11d5938b092aefc8e"},"docx":{"file":"rumeng-intro.docx","mime":"application/vnd.openxmlformats-officedocument.wordprocessingml.document","size":23451,"sha256":"2595b9b0a79efee46d85e3119cb6e8a7452218621aad10e1bc3b964ebabc97c4"},"pdf":{"file":"rumeng-intro.pdf","mime":"application/pdf","size":300150,"sha256":"e6a5677dc2c7bc8f60dc97e12da6d4916a087f0a1cbe5676e3339b6359580400"}},"ch01":{"md":{"file":"rumeng-ch01.md","mime":"text/markdown;charset=utf-8","size":4225,"sha256":"537e95a2834b1fca54e617f3e442e7b2e9b0017d623aeafe8d38cea38e0d0541"},"docx":{"file":"rumeng-ch01.docx","mime":"application/vnd.openxmlformats-officedocument.wordprocessingml.document","size":24781,"sha256":"0365c32519a594145636ec8ffa93cf9828a8319797d31e1fed3918dc4cd83888"},"pdf":{"file":"rumeng-ch01.pdf","mime":"application/pdf","size":458409,"sha256":"5de1ff9d9ff8c3538f9466602353ab7ef03a37ee956ed8f122ea55346f47a08d"}}},"offline":false,"download_base":"releases/bdcbb5cf9861-36804935119-1/downloads/","html_base":"releases/bdcbb5cf9861-36804935119-1/","html":{"file":"rumeng.html","mime":"text/html;charset=utf-8","size":2071629,"sha256":"ad139ea3230cba674be28b066857b6c5123bdfcde75c055e58f6330b14860805"}}</script>
+<script id="embedded-downloads" type="application/json">{}</script>
+<script>/* Shared reader runtime. Plugin API v1; no external dependencies or credentials. */
+(() => {
+  'use strict';
+  const book = JSON.parse(document.getElementById('book-data').textContent);
+  const $ = (s, el = document) => el.querySelector(s);
+  const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+  const byId = id => document.getElementById(id);
+  const chapters = new Map(book.chapters.map(c => [c.id, c]));
+  const ordered = ['cover', 'toc', ...chapters.keys()];
+  const bus = new EventTarget(), services = new Map(), plugins = new Set();
+  let current = 'cover', timer, toastTimer, suppress = false, frame = 0;
+  function store(namespace) {
+    const prefix = `ebooks:${book.id}:v2:${namespace}:`;
+    return Object.freeze({
+      get(key, fallback) { try { const x = localStorage.getItem(prefix + key); return x ? JSON.parse(x) : fallback; } catch (_) { return fallback; } },
+      set(key, value) { try { localStorage.setItem(prefix + key, JSON.stringify(value)); return true; } catch (_) { return false; } }
     });
+  }
+  const state = store('reader');
+  let last = state.get('position', null);
+  if (!last || !chapters.has(last.chapter)) last = null;
+  const clamp = (x, low, high) => Math.min(high, Math.max(low, Number(x) || 0));
+  function notify(message) {
+    byId('toast').textContent = message; byId('toast').classList.add('show');
+    clearTimeout(toastTimer); toastTimer = setTimeout(() => byId('toast').classList.remove('show'), 3600);
+  }
+  function emit(type, detail) { bus.dispatchEvent(new CustomEvent(type, {detail})); }
+  function on(type, fn) {
+    const listener = event => { try { fn(event.detail); } catch (error) { console.error('Reader extension:', type, error); } };
+    bus.addEventListener(type, listener); return () => bus.removeEventListener(type, listener);
+  }
+  function position() {
+    if (!chapters.has(current)) return null;
+    const page = byId(current), top = page.getBoundingClientRect().top + 28;
+    const paras = $$('[data-paragraph]', page);
+    const el = paras.find(p => p.getBoundingClientRect().bottom > top) || paras.at(-1);
+    return {chapter: current, anchor: el?.id || current, offset: el ? clamp((top - el.getBoundingClientRect().top) / Math.max(1, el.getBoundingClientRect().height), 0, 1) : 0,
+      ratio: page.scrollHeight <= page.clientHeight ? 1 : clamp(page.scrollTop / (page.scrollHeight - page.clientHeight), 0, 1),
+      text: (el?.textContent || '').trim().slice(0, 150), version: book.version};
+  }
+  function save() {
+    if (suppress) return;
+    const point = position(); if (!point) return;
+    last = point; state.set('position', point); resumeLabel();
+  }
+  function restore(point) {
+    const page = byId(point.chapter); if (!page || current !== point.chapter) return;
+    const el = byId(point.anchor);
+    if (el && el.closest('.reader-page') === page && el !== page) {
+      page.scrollTop += el.getBoundingClientRect().top - page.getBoundingClientRect().top - 28 + clamp(point.offset, 0, 1) * el.getBoundingClientRect().height;
+    } else page.scrollTop = clamp(point.ratio, 0, 1) * (page.scrollHeight - page.clientHeight);
+    progress();
+  }
+  function resumeLabel() {
+    const button = byId('resume-button'); button.hidden = !last;
+    if (last) button.textContent = `继续阅读 · ${chapters.get(last.chapter).title}`;
+  }
+  function progress() {
+    const point = position(), n = ordered.indexOf(current), pct = point ? Math.round(point.ratio * 100) : 0;
+    byId('progress-label').textContent = point ? `本章 ${pct}%` : current === 'cover' ? '封面' : current === 'toc' ? '目录' : byId(current)?.getAttribute('aria-label') || '';
+    byId('progress-fill').style.width = pct + '%'; $('.progress-track').setAttribute('aria-valuenow', String(pct));
+    byId('prev-button').disabled = n <= 0; byId('next-button').disabled = n < 0 || n >= ordered.length - 1;
+    byId('prev-button').textContent = n === 1 ? '封面' : n === 2 ? '目录' : '上一章';
+    byId('next-button').textContent = n === 0 ? '目录' : n === 1 ? '开始阅读' : n === ordered.length - 1 ? '已读完' : '下一章';
+    const add = byId('add-bookmark'); if (add) add.disabled = !point;
+    emit('progress', point);
+  }
+  function closeDialogs() { $$('dialog[open]').forEach(d => d.close()); }
+  function openDialog(id) {
+    const d = byId(id); if (!d || d.tagName !== 'DIALOG') return;
+    closeDialogs(); emit('dialogopen', id); d.showModal();
+    if (id === 'search-dialog') byId('search-input').focus();
+  }
+  function route(raw = location.hash, options = {}) {
+    let target; try { target = decodeURIComponent(raw.replace(/^#/, '')) || 'cover'; } catch (_) { target = 'cover'; }
+    if (book.legacy_anchors?.[target]) target = book.legacy_anchors[target];
+    let element = byId(target), page = element?.closest('.reader-page');
+    if (!page) { target = 'cover'; element = page = byId('cover'); }
+    if (current !== page.id) save();
+    clearTimeout(timer); suppress = true; current = page.id;
+    $$('.reader-page').forEach(p => p.classList.toggle('active', p === page));
+    $$('[data-nav-chapter]').forEach(a => a.setAttribute('aria-current', a.dataset.navChapter === current ? 'page' : 'false'));
+    $$('.search-hit').forEach(el => el.classList.remove('search-hit')); closeDialogs();
+    document.title = (chapters.get(current)?.display || book.title) + ' · ' + book.title;
+    requestAnimationFrame(() => {
+      if (options.point) restore(options.point);
+      else if (element !== page) { page.scrollTop += element.getBoundingClientRect().top - page.getBoundingClientRect().top - 28; if (options.highlight) element.classList.add('search-hit'); }
+      else page.scrollTop = 0;
+      progress(); requestAnimationFrame(() => { suppress = false; });
+    });
+    emit('navigate', {id: current, anchor: target});
+  }
+  function go(anchor, options = {}) {
+    if (!byId(anchor)) return;
+    try { const url = new URL(location.href); url.hash = encodeURIComponent(anchor); history.pushState(null, '', url.href); } catch (_) { location.hash = anchor; }
+    route('#' + anchor, options);
+  }
+  function preserve(change) {
+    const point = position(); suppress = true; change();
+    requestAnimationFrame(() => { if (point) restore(point); suppress = false; progress(); });
+  }
+  function saveBlob(blob, filename) {
+    const url = URL.createObjectURL(blob), a = document.createElement('a');
+    a.href = url; a.download = filename; document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 60000);
+  }
+  function register(plugin) {
+    if (!plugin || plugin.apiVersion !== 1 || !/^[a-z][a-z0-9-]*$/.test(plugin.id) || plugins.has(plugin.id) || typeof plugin.init !== 'function') throw new Error('Invalid reader extension');
+    plugins.add(plugin.id);
+    if (book.features[plugin.id] === false) return;
+    const api = Object.freeze({book, $, $$, byId, on, emit, go, notify, position, restore, preserve, openDialog, closeDialogs, saveBlob,
+      storage: store(plugin.id), getCurrent: () => current,
+      provide(name, value) { if (services.has(name)) throw new Error('Duplicate service'); services.set(name, value); },
+      service: name => services.get(name),
+      addAction({id, label, run}) {
+        if (!label || typeof run !== 'function' || byId(`extension-action-${plugin.id}-${id}`)) throw new Error('Invalid action');
+        const b = document.createElement('button'); b.id = `extension-action-${plugin.id}-${id}`; b.type = 'button'; b.textContent = label; b.addEventListener('click', run); byId('extension-actions').appendChild(b); return b;
+      },
+      addPage({id, title, element}) {
+        const pid = `extension-${plugin.id}-${id}`;
+        if (!(element instanceof HTMLElement) || byId(pid)) throw new Error('Invalid extension page');
+        const p = document.createElement('section'); p.id = pid; p.className = 'reader-page plugin-page'; p.dataset.pageType = 'plugin'; p.setAttribute('aria-label', title); p.appendChild(element); byId('main').appendChild(p); return pid;
+      }
+    });
+    try { plugin.init(api); } catch (error) { console.error('Reader extension failed:', plugin.id, error); notify('部分扩展未能加载，正文仍可阅读。'); }
+  }
+  window.Ebook = Object.freeze({apiVersion: 1, register, go, on, getCurrent: () => current, service: name => services.get(name)});
+  document.addEventListener('click', e => {
+    const opener = e.target.closest('[data-open]'); if (opener) { openDialog(opener.dataset.open); return; }
+    if (e.target.closest('[data-close]')) { closeDialogs(); return; }
+    const a = e.target.closest('a[href^="#"]'); if (a && e.button === 0 && !e.ctrlKey && !e.metaKey && !e.shiftKey) {
+      let id; try { id = decodeURIComponent(a.getAttribute('href').slice(1)); } catch (_) { return; }
+      if (byId(id)?.closest('.reader-page')) { e.preventDefault(); go(id); }
+    }
   });
-
-  const settings = document.getElementById("settingsPanel");
-  document.getElementById("settingsBtn")?.addEventListener("click", () => settings.hidden = !settings.hidden);
-  document.getElementById("fontSize")?.addEventListener("input", e => document.documentElement.style.setProperty("--reader-size", e.target.value + "px"));
-  document.getElementById("lineHeight")?.addEventListener("input", e => document.documentElement.style.setProperty("--reader-leading", (e.target.value / 10).toFixed(1)));
-  document.querySelectorAll("[data-theme]").forEach(b => b.addEventListener("click", () => document.body.dataset.theme = b.dataset.theme));
-
-  const hash = location.hash.slice(1);
-  show(hash && document.getElementById(hash) ? pages.findIndex(p => p.id === hash) : 0, false);
+  $$('dialog').forEach(d => d.addEventListener('click', e => { if (e.target === d) { const r = d.getBoundingClientRect(); if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) d.close(); } }));
+  byId('prev-button').addEventListener('click', () => { const n = ordered.indexOf(current); if (n > 0) go(ordered[n - 1]); });
+  byId('next-button').addEventListener('click', () => { const n = ordered.indexOf(current); if (n >= 0 && n < ordered.length - 1) go(ordered[n + 1]); });
+  byId('resume-button').addEventListener('click', () => { if (last) go(last.chapter, {point: {...last}}); });
+  document.addEventListener('scroll', e => {
+    if (e.target !== byId(current)) return;
+    if (!frame) frame = requestAnimationFrame(() => { frame = 0; progress(); });
+    clearTimeout(timer); if (!suppress) timer = setTimeout(save, 250);
+  }, true);
+  document.addEventListener('keydown', e => {
+    if ($('dialog[open]') || /INPUT|SELECT|TEXTAREA|BUTTON/.test(e.target.tagName) || e.target.isContentEditable) return;
+    const n = ordered.indexOf(current);
+    if (e.key === 'ArrowLeft' && n > 0) go(ordered[n - 1]);
+    if (e.key === 'ArrowRight' && n >= 0 && n < ordered.length - 1) go(ordered[n + 1]);
+  });
+  addEventListener('hashchange', () => route()); addEventListener('popstate', () => route());
+  addEventListener('pagehide', save); addEventListener('resize', () => requestAnimationFrame(progress));
+  document.addEventListener('visibilitychange', () => { if (document.hidden) save(); });
+  resumeLabel(); queueMicrotask(() => { route(); window.EbookReady = true; });
 })();
+
+;
+Ebook.register({id: 'settings', apiVersion: 1, init(api) {
+  const root = document.documentElement;
+  const defaults = {theme:'paper', paper:'ivory', depth:30, texture:'none', strength:20, font:'serif', size:19, line:2, width:800};
+  const clamp = (v, a, b, fallback) => Number.isFinite(Number(v)) ? Math.min(b, Math.max(a, Number(v))) : fallback;
+  const choice = (v, choices, fallback) => choices.includes(v) ? v : fallback;
+  function normalize(v) {
+    v = v && typeof v === 'object' ? v : {};
+    return {theme:choice(v.theme,['paper','light','night'],'paper'),paper:choice(v.paper,['ivory','sepia','green','gray'],'ivory'),texture:choice(v.texture,['none','paper','fiber'],'none'),font:choice(v.font,['serif','sans'],'serif'),
+      depth:clamp(v.depth,0,100,30),strength:clamp(v.strength,0,100,20),size:clamp(v.size,16,28,19),line:clamp(v.line,1.6,2.4,2),width:choice(Number(v.width),[680,800,960],800)};
+  }
+  let prefs = normalize(api.storage.get('preferences', defaults));
+  const mix = (a,b,t) => a.map((v,i) => Math.round(v+(b[i]-v)*t));
+  const rgb = c => `rgb(${c.join(',')})`;
+  function apply(save = true) {
+    api.preserve(() => {
+      root.dataset.theme = prefs.theme; root.dataset.font = prefs.font;
+      root.dataset.texture = prefs.theme === 'paper' ? prefs.texture : 'none';
+      let page, paper, ink, muted, accent, tint;
+      if (prefs.theme === 'night') {
+        page=[28,32,29];paper=[21,25,23];ink=[227,229,221];muted=[179,190,180];accent=[179,205,184];tint=[39,47,40];
+      } else {
+        const tones = {ivory:[244,235,211],sepia:[233,213,174],green:[218,237,218],gray:[225,226,223]};
+        page = prefs.theme === 'light' ? [255,255,255] : mix([255,255,252],tones[prefs.paper],.25+prefs.depth*.006);
+        paper=mix(page,[0,0,0],.028);ink=[38,48,41];muted=[80,93,83];accent=[51,82,62];tint=mix(page,[101,112,98],.075);
+      }
+      for (const [k,v] of Object.entries({page,paper,panel:page,ink,muted,accent,tint,line:mix(page,ink,.22)})) root.style.setProperty('--'+k,rgb(v));
+      root.style.setProperty('--grain', String(prefs.strength*.0003));
+      root.style.setProperty('--reader-size',prefs.size+'px');root.style.setProperty('--reader-leading',prefs.line);root.style.setProperty('--reader-width',prefs.width+'px');
+      api.byId('paper-settings').hidden = prefs.theme !== 'paper';
+      for (const key of ['theme','paper','texture','font','width']) api.$$(`[data-${key}-choice]`).forEach(b => b.setAttribute('aria-pressed',String(b.dataset[key+'Choice'] === String(prefs[key]))));
+      for (const [id,key] of [['paper-depth','depth'],['texture-strength','strength'],['font-size','size'],['line-height','line']]) {
+        api.byId(id).value=prefs[key];api.byId(id+'-value').textContent=prefs[key];
+      }
+      api.byId('texture-strength').disabled=prefs.texture==='none';
+    });
+    if (save) api.storage.set('preferences',prefs);
+    api.emit('settingschange',{...prefs});
+  }
+  function set(value) { prefs=normalize({...prefs,...value});apply(); }
+  for (const key of ['theme','paper','texture','font','width']) api.$$(`[data-${key}-choice]`).forEach(b => b.addEventListener('click',() => set({[key]:b.dataset[key+'Choice']})));
+  for (const [id,key] of [['paper-depth','depth'],['texture-strength','strength'],['font-size','size'],['line-height','line']]) api.byId(id).addEventListener('input',e => set({[key]:e.target.value}));
+  api.byId('reset-settings').addEventListener('click',() => {prefs={...defaults};apply();api.notify('已恢复默认阅读设置。');});
+  api.provide('settings',{get:() => ({...prefs}),set});apply(false);
+}});
+
+;
+Ebook.register({id:'search',apiVersion:1,init(api) {
+  const input=api.byId('search-input'),results=api.byId('search-results');
+  input.addEventListener('input',() => {
+    results.replaceChildren();const q=input.value.trim().toLocaleLowerCase();if(!q)return;
+    let count=0;
+    for(const ch of api.book.chapters)for(const p of ch.paragraphs){
+      const at=p.text.toLocaleLowerCase().indexOf(q);if(at<0)continue;
+      if(count++>=100)continue;
+      const b=document.createElement('button'),label=document.createElement('small'),text=document.createElement('span');
+      b.type='button';b.className='result-row';label.textContent=ch.display;text.textContent=p.text.slice(Math.max(0,at-22),at+q.length+65);
+      b.append(label,text);b.addEventListener('click',()=>api.go(p.id,{highlight:true}));results.append(b);
+    }
+    const summary=document.createElement('p');summary.className='small muted';summary.textContent=count?`找到 ${count} 处匹配${count>100?'，显示前 100 处':''}`:'没有找到匹配内容。';results.prepend(summary);
+  });
+}});
+
+;
+Ebook.register({id:'bookmarks',apiVersion:1,init(api){
+  const chapters=new Map(api.book.chapters.map(c=>[c.id,c]));
+  function clean(items){return Array.isArray(items)?items.filter(x=>x&&chapters.has(x.chapter)&&typeof x.anchor==='string'&&typeof x.text==='string').slice(0,500).map(x=>({...x,text:x.text.slice(0,200),ratio:Math.min(1,Math.max(0,Number(x.ratio)||0)),offset:Math.min(1,Math.max(0,Number(x.offset)||0))})):[];}
+  let saved=clean(api.storage.get('items',[]));
+  function render(){
+    const list=api.byId('bookmark-list');list.replaceChildren();
+    if(!saved.length){const p=document.createElement('p');p.textContent='暂无书签。阅读时可以在目录菜单中添加书签。';list.append(p);}
+    saved.forEach((point,n)=>{const row=document.createElement('div'),go=document.createElement('button'),remove=document.createElement('button');row.className='bookmark-row';go.type=remove.type='button';go.textContent=chapters.get(point.chapter).display+' · '+point.text;remove.textContent='删除';
+      go.addEventListener('click',()=>api.go(point.chapter,{point}));remove.addEventListener('click',()=>{saved.splice(n,1);api.storage.set('items',saved);render();});row.append(go,remove);list.append(row);});
+  }
+  api.byId('add-bookmark').addEventListener('click',()=>{const p=api.position();if(!p)return;if(saved.some(x=>x.chapter===p.chapter&&x.anchor===p.anchor)){api.notify('此处已有书签。');return;}saved.unshift(p);saved=saved.slice(0,500);api.storage.set('items',saved);api.notify('已添加书签。');});
+  api.on('dialogopen',id=>{if(id==='bookmarks-dialog')render();});
+  api.byId('export-bookmarks').addEventListener('click',()=>api.saveBlob(new Blob([JSON.stringify({schema_version:1,book_id:api.book.id,bookmarks:saved},null,2)],{type:'application/json'}),`${api.book.id}-bookmarks.json`));
+  api.byId('import-bookmarks').addEventListener('click',()=>api.byId('bookmark-file').click());
+  api.byId('bookmark-file').addEventListener('change',async e=>{
+    const file=e.target.files[0];if(!file)return;
+    try{if(file.size>1000000)throw Error();const data=JSON.parse(await file.text());if(data.schema_version!==1||data.book_id!==api.book.id)throw Error();const map=new Map([...saved,...clean(data.bookmarks)].map(x=>[x.chapter+':'+x.anchor,x]));saved=[...map.values()].slice(0,500);api.storage.set('items',saved);render();api.notify('书签已导入。');}catch(_){api.notify('请选择本书导出的书签文件。');}finally{e.target.value='';}
+  });
+}});
+
+;
+Ebook.register({id:'updates',apiVersion:1,init(api){
+  let newer=null,busy=null,lastCheck=0;
+  const offline=api.book.offline||location.protocol==='file:';
+  function show(manifest){
+    newer=manifest;api.byId('update-message').textContent='已有新版本，更新后可阅读和下载。';api.byId('update-notice').hidden=false;
+  }
+  async function check(manual=false){
+    if(offline){if(manual)api.notify('这是离线版本，更新请打开在线阅读网址。');return {status:'offline'};}
+    if(busy)return busy;
+    busy=(async()=>{
+      const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),7000);
+      try{
+        const url=new URL('build-manifest.json',api.book.canonical_url);url.searchParams.set('check',Date.now());
+        const res=await fetch(url,{cache:'no-store',signal:controller.signal});if(!res.ok)throw Error();
+        const m=await res.json();if(m.schema_version!==2||m.book_id!==api.book.id||!m.version||!m.complete)throw Error();
+        lastCheck=Date.now();
+        if(m.version!==api.book.version){show(m);return {status:'newer',version:m.version};}
+        if(manual)api.notify('当前是最新已发布版本。');return {status:'current'};
+      }catch(_){if(manual)api.notify('暂时无法检查更新，当前版本仍可阅读。');return {status:'unavailable'};}
+      finally{clearTimeout(timeout);busy=null;}
+    })();return busy;
+  }
+  function reload(){
+    if(!newer)return;const url=new URL(api.book.canonical_url),point=api.position();url.searchParams.set('v',newer.version);url.hash=point?.anchor||api.getCurrent();location.assign(url.href);
+  }
+  api.byId('load-update').addEventListener('click',reload);api.byId('dismiss-update').addEventListener('click',()=>api.byId('update-notice').hidden=true);
+  api.byId('check-update')?.addEventListener('click',()=>check(true));
+  api.provide('updates',{check,reload});
+  if(!offline){setTimeout(()=>check(),100);document.addEventListener('visibilitychange',()=>{if(!document.hidden&&Date.now()-lastCheck>60000)check();});}
+}});
+
+;
+Ebook.register({id:'downloads',apiVersion:1,init(api){
+  const payload=JSON.parse(api.byId('embedded-downloads').textContent),scope=api.byId('download-scope'),status=api.byId('download-status');
+  let running=false;
+  api.byId('download-version').textContent=`${api.book.offline?'离线版本':'已发布版本'} ${api.book.version} · ${api.book.updated.slice(0,10)}`;
+  function message(result){
+    status.textContent=result?.status==='newer'?'当前页面有新版本，请点击上方“更新”，再下载最新文件。':result?.status==='unavailable'?'暂时无法检查更新。下载文件仍对应本页所示版本。':api.book.offline?'文件对应当前离线版本。':'文件与当前阅读页面对应同一版本。';
+  }
+  api.on('dialogopen',id=>{if(id==='downloads-dialog'){message();api.service('updates')?.check().then(message);}});
+  async function verified(buffer,expected){
+    if(!expected)throw Error('文件缺少校验信息。');
+    if(!globalThis.crypto?.subtle)return;
+    const bytes=new Uint8Array(await crypto.subtle.digest('SHA-256',buffer));
+    const actual=[...bytes].map(x=>x.toString(16).padStart(2,'0')).join('');
+    if(actual!==expected)throw Error('文件版本校验不一致，请刷新页面后重试。');
+  }
+  function offlineHTML(){
+    const clone=document.documentElement.cloneNode(true);
+    clone.querySelectorAll('dialog[open]').forEach(d=>d.removeAttribute('open'));
+    clone.querySelectorAll('.plugin-page').forEach(p=>p.remove());
+    ['bookmark-list','search-results','extension-actions'].forEach(id=>clone.querySelector('#'+id)?.replaceChildren());
+    clone.querySelector('#toast')?.classList.remove('show');clone.querySelector('#update-notice')?.setAttribute('hidden','');
+    clone.querySelector('body')?.removeAttribute('data-print-scope');
+    return new Blob(['<!doctype html>\n'+clone.outerHTML],{type:'text/html;charset=utf-8'});
+  }
+  async function download(format){
+    if(running)return;running=true;
+    try{
+      const update=await api.service('updates')?.check();message(update);
+      if(update?.status==='newer'){api.closeDialogs();api.notify('请先更新页面，再下载最新文件。');return;}
+      if(format==='html'&&api.book.offline){api.saveBlob(offlineHTML(),`${api.book.id}-${api.book.version}.html`);return;}
+      const item=format==='html'?api.book.html:api.book.downloads[scope.value]?.[format];
+      if(!item)throw Error('此格式尚未生成。');
+      let buffer;
+      if(payload[item.file]){const raw=atob(payload[item.file]);buffer=Uint8Array.from(raw,c=>c.charCodeAt(0)).buffer;}
+      else{
+        const base=format==='html'?api.book.html_base:api.book.download_base;
+        const url=new URL(base+encodeURIComponent(item.file),document.baseURI),controller=new AbortController(),timer=setTimeout(()=>controller.abort(),30000);
+        try{const res=await fetch(url,{cache:'no-store',signal:controller.signal});if(!res.ok)throw Error('无法取得此版本文件，请检查网络或更新页面。');buffer=await res.arrayBuffer();}finally{clearTimeout(timer);}
+      }
+      await verified(buffer,item.sha256);
+      const name=item.file.replace(/(\.[^.]+)$/,`-${api.book.version}$1`);
+      api.saveBlob(new Blob([buffer],{type:item.mime}),name);
+    }catch(error){api.notify(error.message||'下载失败，请稍后重试。');}finally{running=false;}
+  }
+  api.$$('[data-download]').forEach(b=>b.addEventListener('click',()=>download(b.dataset.download)));
+  api.byId('print-current').addEventListener('click',()=>{
+    const value=scope.value,prefs=api.service('settings')?.get();
+    document.body.dataset.printScope=value;
+    api.$$('.reader-page').forEach(p=>p.classList.toggle('print-selected',p.id===value));
+    if(prefs){document.documentElement.style.setProperty('--print-size',prefs.size+'px');document.documentElement.style.setProperty('--print-leading',prefs.line);}
+    api.closeDialogs();api.emit('beforeprint',{scope:value});window.print();
+  });
+  addEventListener('afterprint',()=>{delete document.body.dataset.printScope;api.$$('.print-selected').forEach(e=>e.classList.remove('print-selected'));document.documentElement.style.removeProperty('--print-size');document.documentElement.style.removeProperty('--print-leading');api.emit('afterprint',{});});
+  api.provide('downloads',{download});
+}});
 </script>
 </body>
 </html>
