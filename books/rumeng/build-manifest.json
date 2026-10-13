@@ -3,21 +3,21 @@
   "complete": true,
   "book_id": "rumeng",
   "title": "如梦",
-  "version": "7191572b6d5c-38377789167-1",
-  "input_digest": "96efa87c7ac367e0a4c7a7436ae9138c58360c2bb342273a7b2e7fb1b777c759",
-  "content_digest": "f8f927ed498883357fc7a566e8d74f5952d810190ce86fb39ad18a6c20c71bc4",
-  "source_commit": "7191572b6d5c60cb5cbb369501e7fa6572ce6990",
+  "version": "d2068e2d09eb-38378391324-1",
+  "input_digest": "d9d08d94224d1a1f77da29ceea2f07b2ea8d69b8dc084bf8b977faa1859e2512",
+  "content_digest": "afc3bbf69bf8c8a57c91b68cb54bc71e92e7ff0865bc2a113a9a89d5edbdc52e",
+  "source_commit": "d2068e2d09eb21466005c96366b09b7a0e7e9b3a",
   "source_repository": "ScreenplayX/Dream",
-  "updated": "2026-10-13T17:38:37+08:00",
-  "built_at": "2026-10-13T09:39:27.757014+00:00",
+  "updated": "2026-10-13T17:43:46+08:00",
+  "built_at": "2026-10-13T09:44:28.344793+00:00",
   "chapters": [
     {
       "id": "ch01",
       "label": "第一品",
       "title": "来处",
       "display": "第一品｜来处",
-      "count": 1347,
-      "sha256": "f8f927ed498883357fc7a566e8d74f5952d810190ce86fb39ad18a6c20c71bc4"
+      "count": 1342,
+      "sha256": "afc3bbf69bf8c8a57c91b68cb54bc71e92e7ff0865bc2a113a9a89d5edbdc52e"
     }
   ],
   "toc": [
@@ -57,55 +57,55 @@
       "md": {
         "file": "rumeng.md",
         "mime": "text/markdown;charset=utf-8",
-        "size": 4082,
-        "sha256": "f8f927ed498883357fc7a566e8d74f5952d810190ce86fb39ad18a6c20c71bc4",
-        "url": "releases/7191572b6d5c-38377789167-1/downloads/rumeng.md"
+        "size": 4067,
+        "sha256": "afc3bbf69bf8c8a57c91b68cb54bc71e92e7ff0865bc2a113a9a89d5edbdc52e",
+        "url": "releases/d2068e2d09eb-38378391324-1/downloads/rumeng.md"
       },
       "docx": {
         "file": "rumeng.docx",
         "mime": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-        "size": 24670,
-        "sha256": "ecfafb4163e7a5e13874cacd8b054fbd992f7583251039cba52b208af390f8ea",
-        "url": "releases/7191572b6d5c-38377789167-1/downloads/rumeng.docx"
+        "size": 24655,
+        "sha256": "e0040e3b22224d2de52cdb145f1a4acc00f1d3e6aeb963c9b422f6286dd27610",
+        "url": "releases/d2068e2d09eb-38378391324-1/downloads/rumeng.docx"
       },
       "pdf": {
         "file": "rumeng.pdf",
         "mime": "application/pdf",
-        "size": 552269,
-        "sha256": "7a3de71cb928ed40763ef8e3b76e012f486238a4be45a25a71783346397fb376",
-        "url": "releases/7191572b6d5c-38377789167-1/downloads/rumeng.pdf"
+        "size": 551325,
+        "sha256": "45c912f8b77e597155bb96cacb65ae9dabedf4bee8e6e039595a3b7ace577f38",
+        "url": "releases/d2068e2d09eb-38378391324-1/downloads/rumeng.pdf"
       }
     },
     "ch01": {
       "md": {
         "file": "rumeng-ch01.md",
         "mime": "text/markdown;charset=utf-8",
-        "size": 4082,
-        "sha256": "f8f927ed498883357fc7a566e8d74f5952d810190ce86fb39ad18a6c20c71bc4",
-        "url": "releases/7191572b6d5c-38377789167-1/downloads/rumeng-ch01.md"
+        "size": 4067,
+        "sha256": "afc3bbf69bf8c8a57c91b68cb54bc71e92e7ff0865bc2a113a9a89d5edbdc52e",
+        "url": "releases/d2068e2d09eb-38378391324-1/downloads/rumeng-ch01.md"
       },
       "docx": {
         "file": "rumeng-ch01.docx",
         "mime": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-        "size": 24670,
-        "sha256": "ecfafb4163e7a5e13874cacd8b054fbd992f7583251039cba52b208af390f8ea",
-        "url": "releases/7191572b6d5c-38377789167-1/downloads/rumeng-ch01.docx"
+        "size": 24655,
+        "sha256": "e0040e3b22224d2de52cdb145f1a4acc00f1d3e6aeb963c9b422f6286dd27610",
+        "url": "releases/d2068e2d09eb-38378391324-1/downloads/rumeng-ch01.docx"
       },
       "pdf": {
         "file": "rumeng-ch01.pdf",
         "mime": "application/pdf",
-        "size": 442940,
-        "sha256": "bb722e585ba43663b5e3c193acbb37240a19f844d6ddc1357df93134ba419deb",
-        "url": "releases/7191572b6d5c-38377789167-1/downloads/rumeng-ch01.pdf"
+        "size": 441858,
+        "sha256": "18d1a6b68089c475a8489e180ba391d355e2c31cc343f08a37eb16ac8aefaf7e",
+        "url": "releases/d2068e2d09eb-38378391324-1/downloads/rumeng-ch01.pdf"
       }
     }
   },
   "html": {
     "file": "rumeng.html",
     "mime": "text/html;charset=utf-8",
-    "size": 1459444,
-    "sha256": "41f9db734749c8ad7db6e79149d8d5e595c4ea5a0aa49442940d2bcbc5c9a243",
-    "url": "releases/7191572b6d5c-38377789167-1/rumeng.html"
+    "size": 1456630,
+    "sha256": "b3d45931b4aa704187710871cf5e325ab9d54d67579ada5efc0caf0dc267204c",
+    "url": "releases/d2068e2d09eb-38378391324-1/rumeng.html"
   },
   "files": {
     ".nojekyll": {
@@ -113,44 +113,44 @@
       "size": 0
     },
     "rumeng.html": {
-      "sha256": "9c0ff344f99372fbc4b698a57b3e3686a45e92e8a7433874ef37816d01b26d64",
-      "size": 55933
+      "sha256": "f868e8541e2dae33ec71b9c165d04c4bd839babc7c8f6b92213f6a6854920374",
+      "size": 55903
     },
     "index.html": {
-      "sha256": "9c0ff344f99372fbc4b698a57b3e3686a45e92e8a7433874ef37816d01b26d64",
-      "size": 55933
+      "sha256": "f868e8541e2dae33ec71b9c165d04c4bd839babc7c8f6b92213f6a6854920374",
+      "size": 55903
     },
-    "releases/7191572b6d5c-38377789167-1/rumeng.html": {
-      "sha256": "41f9db734749c8ad7db6e79149d8d5e595c4ea5a0aa49442940d2bcbc5c9a243",
-      "size": 1459444
+    "releases/d2068e2d09eb-38378391324-1/rumeng.html": {
+      "sha256": "b3d45931b4aa704187710871cf5e325ab9d54d67579ada5efc0caf0dc267204c",
+      "size": 1456630
     },
-    "releases/7191572b6d5c-38377789167-1/index.html": {
-      "sha256": "4c80ef3468dc87fafe2058dc909f7a4082cb407878acaa7350f779073df01f30",
-      "size": 55861
+    "releases/d2068e2d09eb-38378391324-1/index.html": {
+      "sha256": "c1a44f8f8249d13b1c5ee979e9e614995651e67c5f2295d0830f35a6d800f5c1",
+      "size": 55831
     },
-    "releases/7191572b6d5c-38377789167-1/downloads/rumeng.pdf": {
-      "sha256": "7a3de71cb928ed40763ef8e3b76e012f486238a4be45a25a71783346397fb376",
-      "size": 552269
+    "releases/d2068e2d09eb-38378391324-1/downloads/rumeng.pdf": {
+      "sha256": "45c912f8b77e597155bb96cacb65ae9dabedf4bee8e6e039595a3b7ace577f38",
+      "size": 551325
     },
-    "releases/7191572b6d5c-38377789167-1/downloads/rumeng-ch01.pdf": {
-      "sha256": "bb722e585ba43663b5e3c193acbb37240a19f844d6ddc1357df93134ba419deb",
-      "size": 442940
+    "releases/d2068e2d09eb-38378391324-1/downloads/rumeng-ch01.pdf": {
+      "sha256": "18d1a6b68089c475a8489e180ba391d355e2c31cc343f08a37eb16ac8aefaf7e",
+      "size": 441858
     },
-    "releases/7191572b6d5c-38377789167-1/downloads/rumeng.docx": {
-      "sha256": "ecfafb4163e7a5e13874cacd8b054fbd992f7583251039cba52b208af390f8ea",
-      "size": 24670
+    "releases/d2068e2d09eb-38378391324-1/downloads/rumeng.docx": {
+      "sha256": "e0040e3b22224d2de52cdb145f1a4acc00f1d3e6aeb963c9b422f6286dd27610",
+      "size": 24655
     },
-    "releases/7191572b6d5c-38377789167-1/downloads/rumeng.md": {
-      "sha256": "f8f927ed498883357fc7a566e8d74f5952d810190ce86fb39ad18a6c20c71bc4",
-      "size": 4082
+    "releases/d2068e2d09eb-38378391324-1/downloads/rumeng.md": {
+      "sha256": "afc3bbf69bf8c8a57c91b68cb54bc71e92e7ff0865bc2a113a9a89d5edbdc52e",
+      "size": 4067
     },
-    "releases/7191572b6d5c-38377789167-1/downloads/rumeng-ch01.docx": {
-      "sha256": "ecfafb4163e7a5e13874cacd8b054fbd992f7583251039cba52b208af390f8ea",
-      "size": 24670
+    "releases/d2068e2d09eb-38378391324-1/downloads/rumeng-ch01.docx": {
+      "sha256": "e0040e3b22224d2de52cdb145f1a4acc00f1d3e6aeb963c9b422f6286dd27610",
+      "size": 24655
     },
-    "releases/7191572b6d5c-38377789167-1/downloads/rumeng-ch01.md": {
-      "sha256": "f8f927ed498883357fc7a566e8d74f5952d810190ce86fb39ad18a6c20c71bc4",
-      "size": 4082
+    "releases/d2068e2d09eb-38378391324-1/downloads/rumeng-ch01.md": {
+      "sha256": "afc3bbf69bf8c8a57c91b68cb54bc71e92e7ff0865bc2a113a9a89d5edbdc52e",
+      "size": 4067
     }
   }
 }
