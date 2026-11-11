@@ -4,7 +4,7 @@
 
 ## 架构
 
-- 私有写作仓库：保存原始 Markdown、结构稿、素材与完整 Git 历史。
+- 私有写作仓库：保存原始 Markdown 正文与完整 Git 历史。
 - 本仓库：只保存自动构建后的公开阅读站与下载文件。
 - GitHub Pages：从 `gh-pages` 分支提供静态网站。
 - GitHub Actions：由各私有书稿仓库在正文提交后触发发布。
@@ -24,3 +24,5 @@
 ## 重要
 
 本仓库中的文件属于公开发布内容。不要把私人素材、未发布正文或访问令牌提交到这里。
+
+<!-- Pages deployment retry: 2026-11-11; no manuscript or generated site content changed. -->
