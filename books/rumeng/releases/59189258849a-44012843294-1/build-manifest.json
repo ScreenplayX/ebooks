@@ -1,0 +1,240 @@
+{
+  "schema_version": 2,
+  "complete": true,
+  "book_id": "rumeng",
+  "title": "观",
+  "version": "59189258849a-44012843294-1",
+  "input_digest": "8d66c55431080d1a8136b0e44b101f68bd2ab37ceb7657b97398bc0e8d8ba67c",
+  "content_digest": "b4765cbe86174c719d597b12ff104e2c739a7198bb5cc9f4f1e550197f5bf917",
+  "source_commit": "59189258849a3123e3e750864e593d181ae3ed56",
+  "source_repository": "ScreenplayX/Dream",
+  "download_basename": "guan",
+  "cover_quote": "我们看到的世界，是眼里的世界，还是心里的世界？",
+  "cover_quote_from": null,
+  "cover_type": "raster-svg",
+  "cover_quote_lines": [
+    "我们看到的世界，",
+    "是眼里的世界，",
+    "还是心里的世界？"
+  ],
+  "updated": "2026-11-17T11:49:10+08:00",
+  "built_at": "2026-11-17T03:50:01.891576+00:00",
+  "chapters": [
+    {
+      "id": "ch01",
+      "label": "第一品",
+      "title": "来处",
+      "display": "第一品｜来处",
+      "count": 1688,
+      "sha256": "44cc1d6d5a02357ddfb27b2c7346bf607c831e51b59654a1a4fa6780281179ed"
+    },
+    {
+      "id": "ch02",
+      "label": "第二品",
+      "title": "颠倒",
+      "display": "第二品｜颠倒",
+      "count": 1606,
+      "sha256": "a10f6b8841ecebfdcf3bc4230867ba8a89cdfeaf327f923563eafa0903df75fc"
+    },
+    {
+      "id": "ch03",
+      "label": "第三品",
+      "title": "自在",
+      "display": "第三品｜自在",
+      "count": 1608,
+      "sha256": "1a7a8f372c42dcfea0c9ac7509241f161b20eeb44b21ae5910b7d5aba0c03052"
+    }
+  ],
+  "toc": [
+    {
+      "id": "ch01",
+      "label": "第一品",
+      "title": "来处",
+      "status": "published"
+    },
+    {
+      "id": "ch02",
+      "label": "第二品",
+      "title": "颠倒",
+      "status": "published"
+    },
+    {
+      "id": "ch03",
+      "label": "第三品",
+      "title": "自在",
+      "status": "published"
+    }
+  ],
+  "book_complete": true,
+  "downloads": {
+    "all": {
+      "md": {
+        "file": "guan.md",
+        "mime": "text/markdown;charset=utf-8",
+        "size": 14938,
+        "sha256": "fbe37bcf941c09fc055a6f3889b25cad5202aca5ca3a04415e87ae72910b5f58",
+        "url": "releases/59189258849a-44012843294-1/downloads/guan.md"
+      },
+      "docx": {
+        "file": "guan.docx",
+        "mime": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "size": 30405,
+        "sha256": "6499596932ff50f0090b2be67b69a9c41e26e91484362517cdee2a4d1ad87ed0",
+        "url": "releases/59189258849a-44012843294-1/downloads/guan.docx"
+      },
+      "pdf": {
+        "file": "guan.pdf",
+        "mime": "application/pdf",
+        "size": 1504042,
+        "sha256": "f4e007e49b91b5ff599738ca29a8a359d9a45d1a7aa119ba190ca81ca7f3bc54",
+        "url": "releases/59189258849a-44012843294-1/downloads/guan.pdf"
+      }
+    },
+    "ch01": {
+      "md": {
+        "file": "guan-ch01.md",
+        "mime": "text/markdown;charset=utf-8",
+        "size": 5109,
+        "sha256": "44cc1d6d5a02357ddfb27b2c7346bf607c831e51b59654a1a4fa6780281179ed",
+        "url": "releases/59189258849a-44012843294-1/downloads/guan-ch01.md"
+      },
+      "docx": {
+        "file": "guan-ch01.docx",
+        "mime": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "size": 25281,
+        "sha256": "e8067eb80d4358ff0c32f0fd2504511c3403f13122b9008e0c216299d6e720e5",
+        "url": "releases/59189258849a-44012843294-1/downloads/guan-ch01.docx"
+      },
+      "pdf": {
+        "file": "guan-ch01.pdf",
+        "mime": "application/pdf",
+        "size": 497413,
+        "sha256": "596f50378aaf70a65127e624856aa27e83683c35d62e320ce923463bc969f836",
+        "url": "releases/59189258849a-44012843294-1/downloads/guan-ch01.pdf"
+      }
+    },
+    "ch02": {
+      "md": {
+        "file": "guan-ch02.md",
+        "mime": "text/markdown;charset=utf-8",
+        "size": 4908,
+        "sha256": "a10f6b8841ecebfdcf3bc4230867ba8a89cdfeaf327f923563eafa0903df75fc",
+        "url": "releases/59189258849a-44012843294-1/downloads/guan-ch02.md"
+      },
+      "docx": {
+        "file": "guan-ch02.docx",
+        "mime": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "size": 25230,
+        "sha256": "52bbcc97952b9c577a12f801390b6fe2687603dd9bee34bb0a326ccb34785839",
+        "url": "releases/59189258849a-44012843294-1/downloads/guan-ch02.docx"
+      },
+      "pdf": {
+        "file": "guan-ch02.pdf",
+        "mime": "application/pdf",
+        "size": 471196,
+        "sha256": "8fdc500bd2ce4de7aa857192fcfa98c3a64af12677d66d80cccde717cac20b1d",
+        "url": "releases/59189258849a-44012843294-1/downloads/guan-ch02.pdf"
+      }
+    },
+    "ch03": {
+      "md": {
+        "file": "guan-ch03.md",
+        "mime": "text/markdown;charset=utf-8",
+        "size": 4920,
+        "sha256": "1a7a8f372c42dcfea0c9ac7509241f161b20eeb44b21ae5910b7d5aba0c03052",
+        "url": "releases/59189258849a-44012843294-1/downloads/guan-ch03.md"
+      },
+      "docx": {
+        "file": "guan-ch03.docx",
+        "mime": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "size": 25340,
+        "sha256": "bac67e82233504496f39e6d3d2801dce348b3b106c803b65e375c628604037a4",
+        "url": "releases/59189258849a-44012843294-1/downloads/guan-ch03.docx"
+      },
+      "pdf": {
+        "file": "guan-ch03.pdf",
+        "mime": "application/pdf",
+        "size": 510145,
+        "sha256": "b6310ea95f7d7f94c10a018207fba0e554dbb79884df02f69d818eff950dbb95",
+        "url": "releases/59189258849a-44012843294-1/downloads/guan-ch03.pdf"
+      }
+    }
+  },
+  "html": {
+    "file": "guan.html",
+    "mime": "text/html;charset=utf-8",
+    "size": 4283429,
+    "sha256": "f63744776bc11440870961aa3fdf71379133592640e96e21d5758a5ba2197ed2",
+    "url": "releases/59189258849a-44012843294-1/guan.html"
+  },
+  "files": {
+    ".nojekyll": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "index.html": {
+      "sha256": "2ddb9f4f24c3537d377f2189a2d8da4c1fa0064d68c1bdd5374d4bd0744e5fdc",
+      "size": 124858
+    },
+    "rumeng.html": {
+      "sha256": "2ddb9f4f24c3537d377f2189a2d8da4c1fa0064d68c1bdd5374d4bd0744e5fdc",
+      "size": 124858
+    },
+    "releases/59189258849a-44012843294-1/index.html": {
+      "sha256": "73fcafbc6e0fee5cd490bd11828ea411efcc035cf091d93a8461f0d5e48eae82",
+      "size": 124786
+    },
+    "releases/59189258849a-44012843294-1/guan.html": {
+      "sha256": "f63744776bc11440870961aa3fdf71379133592640e96e21d5758a5ba2197ed2",
+      "size": 4283429
+    },
+    "releases/59189258849a-44012843294-1/downloads/guan.docx": {
+      "sha256": "6499596932ff50f0090b2be67b69a9c41e26e91484362517cdee2a4d1ad87ed0",
+      "size": 30405
+    },
+    "releases/59189258849a-44012843294-1/downloads/guan.pdf": {
+      "sha256": "f4e007e49b91b5ff599738ca29a8a359d9a45d1a7aa119ba190ca81ca7f3bc54",
+      "size": 1504042
+    },
+    "releases/59189258849a-44012843294-1/downloads/guan-ch01.docx": {
+      "sha256": "e8067eb80d4358ff0c32f0fd2504511c3403f13122b9008e0c216299d6e720e5",
+      "size": 25281
+    },
+    "releases/59189258849a-44012843294-1/downloads/guan-ch02.md": {
+      "sha256": "a10f6b8841ecebfdcf3bc4230867ba8a89cdfeaf327f923563eafa0903df75fc",
+      "size": 4908
+    },
+    "releases/59189258849a-44012843294-1/downloads/guan-ch03.md": {
+      "sha256": "1a7a8f372c42dcfea0c9ac7509241f161b20eeb44b21ae5910b7d5aba0c03052",
+      "size": 4920
+    },
+    "releases/59189258849a-44012843294-1/downloads/guan.md": {
+      "sha256": "fbe37bcf941c09fc055a6f3889b25cad5202aca5ca3a04415e87ae72910b5f58",
+      "size": 14938
+    },
+    "releases/59189258849a-44012843294-1/downloads/guan-ch02.pdf": {
+      "sha256": "8fdc500bd2ce4de7aa857192fcfa98c3a64af12677d66d80cccde717cac20b1d",
+      "size": 471196
+    },
+    "releases/59189258849a-44012843294-1/downloads/guan-ch01.md": {
+      "sha256": "44cc1d6d5a02357ddfb27b2c7346bf607c831e51b59654a1a4fa6780281179ed",
+      "size": 5109
+    },
+    "releases/59189258849a-44012843294-1/downloads/guan-ch01.pdf": {
+      "sha256": "596f50378aaf70a65127e624856aa27e83683c35d62e320ce923463bc969f836",
+      "size": 497413
+    },
+    "releases/59189258849a-44012843294-1/downloads/guan-ch03.pdf": {
+      "sha256": "b6310ea95f7d7f94c10a018207fba0e554dbb79884df02f69d818eff950dbb95",
+      "size": 510145
+    },
+    "releases/59189258849a-44012843294-1/downloads/guan-ch03.docx": {
+      "sha256": "bac67e82233504496f39e6d3d2801dce348b3b106c803b65e375c628604037a4",
+      "size": 25340
+    },
+    "releases/59189258849a-44012843294-1/downloads/guan-ch02.docx": {
+      "sha256": "52bbcc97952b9c577a12f801390b6fe2687603dd9bee34bb0a326ccb34785839",
+      "size": 25230
+    }
+  }
+}
